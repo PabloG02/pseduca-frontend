@@ -14,7 +14,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, var(--blue-uvigo) 95%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, var(--bg-blue-uvigo-700) 95%);
     z-index: 1;
 }
 

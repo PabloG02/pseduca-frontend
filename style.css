@@ -29,11 +29,22 @@
     --text-7xl-line-height: 1;
     --text-8xl-line-height: 1;
     --text-9xl-line-height: 1;
-}
 
-/* Custom styles */
-:root {
-    --blue-uvigo: #073349;
+    /* Colors */
+    /* Generated with https://www.genomecolor.space/ #073349 */
+    --bg-blue-uvigo-50: #DDE3E6;
+    --bg-blue-uvigo-100: #8093A0;
+    --bg-blue-uvigo-200: #708795;
+    --bg-blue-uvigo-300: #627A8A;
+    --bg-blue-uvigo-400: #546E7F;
+    --bg-blue-uvigo-500: #456275;
+    --bg-blue-uvigo-600: #284A5E;
+    --bg-blue-uvigo-700: #073349;
+    --bg-blue-uvigo-800: #05293B;
+    --bg-blue-uvigo-900: #041E2C;
+
+    /* Box Shadow */
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 /* Font imports */
@@ -94,7 +105,7 @@ img, svg {
 
 /* Common styles */
 .uvigo-bg {
-    background-color: var(--blue-uvigo);
+    background-color: var(--bg-blue-uvigo-700);
     color: white;
 }
 
@@ -181,7 +192,7 @@ img, svg {
 }
 
 .nav-menu a {
-    color: var(--blue-uvigo);
+    color: var(--bg-blue-uvigo-700);
     font-size: var(--text-lg-font-size);
     line-height: var(--text-lg-line-height);
 }
