@@ -53,6 +53,11 @@
     src: url("/assets/fonts/CAMPUS_SIMPLE.ttf") format("truetype");
 }
 
+/* Enable cross-document view transitions */
+@view-transition {
+    navigation: auto;
+}
+
 /* CSS Reset */
 * {
     margin: 0;
