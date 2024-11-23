@@ -56,11 +56,12 @@ class DataTable extends HTMLElement {
     async #fetchData() {
         try {
             const url = this.#buildUrl('list');
-            //url.searchParams.set('page', this.#currentPage.toString());
-            //url.searchParams.set('size', this.#rowsPerPage.toString());
 
             // Add filters to POST body if they exist replacing camelCase with underscores in lowercase
             const filters = Object.fromEntries([...this.#activeFilters.entries()].map(([key, value]) => [key.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase(), value]));
+            // Pagination
+            filters.limit = this.#rowsPerPage;
+            filters.offset = (this.#currentPage - 1) * this.#rowsPerPage;
 
             const response = await fetch(url, {
                 method: 'POST',
@@ -74,9 +75,8 @@ class DataTable extends HTMLElement {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            //const { data, metadata } = await response.json();
-            const data = await response.json();
-            //this.#totalPages = metadata.totalPages;
+            const { data, total_count } = await response.json();
+            this.#totalPages = total_count / this.#rowsPerPage;
             return data;
         } catch (error) {
             console.error('Failed to fetch data:', error);
@@ -324,6 +324,7 @@ class DataTable extends HTMLElement {
         `;
         this.querySelector('.pagination').outerHTML = pagination;
 
+        this.addEventListeners();
     }
 
     addEventListeners() {
