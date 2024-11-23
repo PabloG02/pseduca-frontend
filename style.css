@@ -114,6 +114,48 @@ img, svg {
     color: white;
 }
 
+.primary-button, .secondary-button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: var(--text-sm-font-size);
+    line-height: var(--text-sm-line-height);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.primary-button {
+    background-color: var(--bg-blue-uvigo-700);
+    color: white;
+    border: none;
+    font-weight: 500;
+}
+
+.primary-button:hover {
+    background-color: var(--bg-blue-uvigo-500);
+}
+
+.primary-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-blue-uvigo-300) 50%, transparent);
+}
+
+.secondary-button {
+    background: white;
+    color: var(--bg-blue-uvigo-700);
+    border: 1px solid var(--bg-blue-uvigo-200);
+}
+
+.secondary-button:hover {
+    background-color: var(--bg-blue-uvigo-50);
+}
+
+.secondary-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-blue-uvigo-300) 50%, transparent);
+}
+
 /* Header - Common styles */
 .top-header, .bottom-header {
     display: flex;
