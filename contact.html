@@ -55,12 +55,32 @@
         </ul>
       </nav>
       <!-- toggle-menu content -->
+
+      <div class="toggle-menu">
+        <img
+          id="toggleImg"
+          src="/assets/bootstrap-icons/chevron-down.svg"
+          onclick="toggleNavMenu()"
+        />
+        <script>
+          function toggleNavMenu() {
+            const navMenu = document.querySelector(".nav-menu");
+            navMenu.style.display =
+              navMenu.style.display === "none" || navMenu.style.display === ""
+                ? "block"
+                : "none";
+            const img = (document.getElementById("toggleImg").src =
+              navMenu.style.display === "none" || navMenu.style.display === ""
+                ? "assets/bootstrap-icons/chevron-down.svg"
+                : "assets/bootstrap-icons/chevron-up.svg");
+          }
+        </script>
+      </div>
     </div>
 
     <!-- Specific page content -->
 
-    <section class="hero" aria-label="Hero section"></section>
-
+    <section></section>
     <main>
       <section class="uvigo-bg">
         <div class="container about">
