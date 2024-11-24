@@ -55,6 +55,43 @@
         </ul>
       </nav>
       <!-- toggle-menu content -->
+      <div class="toggle-menu">
+        <img
+          id="toggleImg"
+          src="/assets/bootstrap-icons/chevron-down.svg"
+          onclick="toggleNavMenu()"
+        />
+      </div>
+      <script>
+        const navMenu = document.querySelector(".nav-menu");
+        const toggleMenu = document.querySelector(".toggle-menu");
+        const img = document.getElementById("toggleImg");
+        let isMenuOpen = false;
+
+        function handleResize() {
+          if (window.matchMedia("(max-width: 1080px)").matches) {
+            isMenuOpen = false;
+            img.src = "assets/bootstrap-icons/chevron-down.svg";
+            toggleMenu.style.display = "block";
+            navMenu.style.display = "none";
+          } else {
+            toggleMenu.style.display = "none";
+            navMenu.style.display = "block";
+          }
+        }
+
+        handleResize();
+
+        window.addEventListener("resize", handleResize);
+
+        function toggleNavMenu() {
+          isMenuOpen = isMenuOpen ? false : true;
+          img.src = isMenuOpen
+            ? "assets/bootstrap-icons/chevron-up.svg"
+            : "assets/bootstrap-icons/chevron-down.svg";
+          navMenu.style.display = isMenuOpen ? "block" : "none";
+        }
+      </script>
     </div>
 
     <!-- Specific page content -->
