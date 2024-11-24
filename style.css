@@ -199,9 +199,9 @@ svg {
   color: #666;
 }
 
-.nav-menu {
+/* .nav-menu {
   display: block;
-}
+} */
 
 .nav-menu ul {
   list-style-type: none;
@@ -232,9 +232,9 @@ svg {
     padding: 1em;
   }
 
-  .nav-menu {
+  /* .nav-menu {
     display: none;
-  }
+  } */
 
   .nav-menu ul {
     flex-flow: column wrap;

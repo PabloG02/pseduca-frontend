@@ -62,20 +62,37 @@
           src="/assets/bootstrap-icons/chevron-down.svg"
           onclick="toggleNavMenu()"
         />
-        <script>
-          function toggleNavMenu() {
-            const navMenu = document.querySelector(".nav-menu");
-            navMenu.style.display =
-              navMenu.style.display === "none" || navMenu.style.display === ""
-                ? "block"
-                : "none";
-            const img = (document.getElementById("toggleImg").src =
-              navMenu.style.display === "none" || navMenu.style.display === ""
-                ? "assets/bootstrap-icons/chevron-down.svg"
-                : "assets/bootstrap-icons/chevron-up.svg");
-          }
-        </script>
       </div>
+      <script>
+        const navMenu = document.querySelector(".nav-menu");
+        const toggleMenu = document.querySelector(".toggle-menu");
+        const img = document.getElementById("toggleImg");
+        let isMenuOpen = false;
+
+        function handleResize() {
+          if (window.matchMedia("(max-width: 1080px)").matches) {
+            isMenuOpen = false;
+            img.src = "assets/bootstrap-icons/chevron-down.svg";
+            toggleMenu.style.display = "block";
+            navMenu.style.display = "none";
+          } else {
+            toggleMenu.style.display = "none";
+            navMenu.style.display = "block";
+          }
+        }
+
+        handleResize();
+
+        window.addEventListener("resize", handleResize);
+
+        function toggleNavMenu() {
+          isMenuOpen = isMenuOpen ? false : true;
+          img.src = isMenuOpen
+            ? "assets/bootstrap-icons/chevron-up.svg"
+            : "assets/bootstrap-icons/chevron-down.svg";
+          navMenu.style.display = isMenuOpen ? "block" : "none";
+        }
+      </script>
     </div>
 
     <!-- Specific page content -->
