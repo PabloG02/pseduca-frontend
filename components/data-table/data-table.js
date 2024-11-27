@@ -245,12 +245,12 @@ class DataTable extends HTMLElement {
     }
 
     /** Generate the dialog form content based on the column type */
-    #generateDialogFormContent(data = {}, mode = 'view') {
+    #generateDialogFormContent(data = {}, mode = DialogType.VIEW) {
         let content = '';
 
         this.parseJSON('columns').forEach(col => {
             const value = data[col.name] || '';
-            const isReadOnly = mode === 'view';
+            const isReadOnly = mode === DialogType.VIEW || (mode === DialogType.EDIT && col?.id);
 
             content += `
                 <div>
