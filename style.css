@@ -45,6 +45,10 @@
 
     /* Box Shadow */
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    /* Input styles */
+    --input-bg: hsl(0 0% 98.5% / 1);
+    --input-border: hsl(0 0% 83% / 1);
 }
 
 /* Font imports */
@@ -114,6 +118,7 @@ img, svg {
     color: white;
 }
 
+/* Buttons */
 .primary-button, .secondary-button {
     padding: 8px 16px;
     border-radius: 4px;
@@ -154,6 +159,33 @@ img, svg {
 .secondary-button:focus {
     outline: none;
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-blue-uvigo-300) 50%, transparent);
+}
+
+/* Form styles */
+.form-label {
+    display: block;
+    font-size: var(--text-sm-font-size);
+    line-height: var(--text-sm-line-height);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    font-size: var(--text-base-font-size);
+    line-height: var(--text-base-line-height);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--bg-blue-uvigo-600);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-blue-uvigo-100) 25%, transparent);
 }
 
 /* Header - Common styles */

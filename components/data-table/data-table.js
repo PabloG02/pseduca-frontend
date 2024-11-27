@@ -1,6 +1,9 @@
+import DataService from "../data-service.js";
+import CustomDialog from "../custom-dialog/custom-dialog.js";
+
 class DataTable extends HTMLElement {
     // Private fields
-    #baseUrl = 'http://localhost:80/';
+    #dataService;
     #data = [];
 
     #currentPage = 1;
@@ -12,21 +15,26 @@ class DataTable extends HTMLElement {
         super();
     }
 
+    /** The attributes the component accepts */
     static get observedAttributes() {
-        return ['columns', 'data-controller'];
+        return ['columns', 'data-controller', 'data-actions'];
     }
 
+    /** Lifecycle method when the component is connected to the DOM */
     async connectedCallback() {
         if (this.hasAttribute('data-controller')) {
+            this.#dataService = new DataService(this.getAttribute('data-controller'));
             await this.#firstTimeLoadData();
         }
     }
 
+    /** Fetch data from the server and render the complete table */
     async #firstTimeLoadData() {
         this.#data = await this.#fetchData();
         this.renderAll();
     }
 
+    /** Fetch data from the server and update the table partially */
     async #loadData() {
         this.#data = await this.#fetchData();
         this.renderTableBodyAndFooter();
@@ -39,49 +47,18 @@ class DataTable extends HTMLElement {
     //     }
     // }
 
-    #buildUrl(action) {
-        const url = new URL(this.#baseUrl);
-        const params = new URLSearchParams();
-
-        // Add controller and action
-        const controller = this.getAttribute('data-controller');
-
-        params.set('controller', controller);
-        params.set('action', action);
-
-        url.search = params.toString();
-        return url;
-    }
-
+    /** Fetch data from the server with filters and pagination */
     async #fetchData() {
-        try {
-            const url = this.#buildUrl('list');
+        // Add filters to POST body if they exist replacing camelCase with underscores in lowercase
+        const filters = Object.fromEntries([...this.#activeFilters.entries()].map(([key, value]) => [key.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase(), value]));
+        // Pagination
+        filters.limit = this.#rowsPerPage;
+        filters.offset = (this.#currentPage - 1) * this.#rowsPerPage;
 
-            // Add filters to POST body if they exist replacing camelCase with underscores in lowercase
-            const filters = Object.fromEntries([...this.#activeFilters.entries()].map(([key, value]) => [key.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase(), value]));
-            // Pagination
-            filters.limit = this.#rowsPerPage;
-            filters.offset = (this.#currentPage - 1) * this.#rowsPerPage;
+        const { data, total_count } = await this.#dataService.fetchData(filters, { limit: this.#rowsPerPage, offset: (this.#currentPage - 1) * this.#rowsPerPage });
+        this.#totalPages = total_count / this.#rowsPerPage;
 
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(filters)
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const { data, total_count } = await response.json();
-            this.#totalPages = total_count / this.#rowsPerPage;
-            return data;
-        } catch (error) {
-            console.error('Failed to fetch data:', error);
-            return [];
-        }
+        return data;
     }
 
     parseJSON(attr) {
@@ -90,6 +67,22 @@ class DataTable extends HTMLElement {
         } catch (e) {
             console.error(`Invalid JSON for attribute: ${attr}`, e);
             return [];
+        }
+    }
+
+    /** Get the allowed actions from the data-actions attribute to hide unwanted buttons */
+    #getAllowedActions() {
+        const defaultActions = ['view', 'edit', 'delete', 'create'];
+        const actionsAttr = this.getAttribute('data-actions');
+
+        if (!actionsAttr) return defaultActions;
+
+        try {
+            const parsedActions = JSON.parse(actionsAttr.toLowerCase());
+            return parsedActions.filter(action => defaultActions.includes(action));
+        } catch (e) {
+            console.error('Invalid data-actions attribute:', e);
+            return defaultActions;
         }
     }
 
@@ -146,9 +139,11 @@ class DataTable extends HTMLElement {
 
             // Add buttons
             const buttonTd = document.createElement('td');
-            ['View', 'Edit', 'Delete'].forEach((action) => {
+            this.#getAllowedActions().forEach((action) => {
+                if (action === 'create') return;
+
                 const button = document.createElement('button');
-                button.textContent = action;
+                button.textContent = action.replace(/^\w/, c => c.toUpperCase());
                 button.className = `button ${action.toLowerCase()}-button`;
                 buttonTd.appendChild(button);
             });
@@ -160,6 +155,7 @@ class DataTable extends HTMLElement {
         return tbody;
     }
 
+    /** Format the cell value based on the column type */
     #formatCell(value, type) {
         if (value == null) return '';
 
@@ -173,111 +169,14 @@ class DataTable extends HTMLElement {
         return formatters[type]?.(value) ?? value;
     }
 
+    /** Render the complete table */
     renderAll() {
         const columns = this.parseJSON('columns');
-
-        // Styles for the component
-        const styles = `
-      <style>
-        data-table {
-            display: block;
-          
-            .crud-header {
-                padding-block: 20px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: flex-end;
-                gap: 10px;
-                border-bottom: 1px solid #e5e7eb;
-            }
-            
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-            
-            th {
-                background: #f9fafb;
-                text-align: left;
-                padding: 12px 16px;
-                font-size: var(--text-sm-font-size);
-                line-height: var(--text-sm-line-height);
-                border-spacing: 0;
-                border-bottom: 1px solid #e5e7eb;
-            }
-            
-            .filter-input {
-                width: 100%;
-                padding: 8px 32px 8px 10px;
-                border: 1px solid #e5e7eb;
-                border-radius: 4px;
-                background: white;
-            }
-            
-            .filter-icon {
-                position: absolute;
-                right: 8px;
-                color: #6b7280;
-                font-size: 14px;
-            }
-            
-            td {
-                padding: 16px;
-                border-bottom: 1px solid #e5e7eb;
-                color: #6b7280;
-            }
-            
-            .table-key {
-                color: #111827;
-                font-weight: 500;
-            }
-            
-            .view-button, .edit-button, .delete-button {
-                color: white;
-                border: none;
-                padding: 8px 12px;
-                margin-right: 8px;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-            
-            .view-button {
-                background: #10b981;
-            }
-            
-            .edit-button {
-                background: #2563eb;
-            }
-            
-            .delete-button {
-                background: #ef4444;
-            }
-            
-            .pagination {
-                padding: 20px 0 20px 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            .page-link {
-                padding: 8px 12px;
-                border: 1px solid #e5e7eb;
-                color: #374151;
-                text-decoration: none;
-            }
-            
-            .page-link:hover {
-                background: #f3f4f6;
-            }
-        }
-      </style>
-    `;
 
         // HTML structure
         const header = `
           <div class="crud-header">
-            <button class="primary-button">+ Add Row</button>
+            ${this.#getAllowedActions().includes('create') ? '<button class="primary-button add">+ Add Row</button>' : ''}
             <button class="secondary-button">Actions ▾</button>
           </div>
         `;
@@ -296,18 +195,19 @@ class DataTable extends HTMLElement {
         `;
 
         this.innerHTML = `
-          ${styles}
           ${header}
           <table>
             ${tableHeader}
             ${tableBody}
           </table>
           ${pagination}
+          <custom-dialog></custom-dialog>
         `;
 
         this.addEventListeners();
     }
 
+    /** Render the table body and footer */
     renderTableBodyAndFooter() {
         const columns = this.parseJSON('columns');
         const tableBody = this.#createTableBody(this.#data, columns).outerHTML;
@@ -325,6 +225,113 @@ class DataTable extends HTMLElement {
         this.querySelector('.pagination').outerHTML = pagination;
 
         this.addEventListeners();
+    }
+
+    /** Open the dialog and populate it dynamically */
+    openDialog(title, data, type) {
+        this.dialog = this.querySelector('custom-dialog');
+
+        const options = {};
+        if (type === DialogType.VIEW) {
+            options.showFooter = false;
+        }
+
+        this.dialog.open(
+            title,
+            this.#generateDialogFormContent(data, type), // TODO: handle delete
+            () => this.handleDialogConfirm(data, type),
+            options
+        );
+    }
+
+    /** Generate the dialog form content based on the column type */
+    #generateDialogFormContent(data = {}, mode = 'view') {
+        let content = '';
+
+        this.parseJSON('columns').forEach(col => {
+            const value = data[col.name] || '';
+            const isReadOnly = mode === 'view';
+
+            content += `
+                <div>
+                    <label class="form-label">${col.label}</label>
+                    ${this.#renderInputElement(col, value, isReadOnly)}
+                </div>
+            `;
+        });
+
+        return content;
+    }
+
+    /** Render appropriate input element based on column type */
+    #renderInputElement(column, value, isReadOnly) {
+        const baseAttrs = `
+            class="form-input" 
+            data-column="${column.name}"
+            ${isReadOnly ? 'readonly' : ''}
+        `;
+
+        switch (column.type) {
+            case 'textarea':
+                return `
+                    <textarea 
+                        ${baseAttrs}
+                        rows="${column.rows || 4}"
+                        cols="${column.cols || 50}"
+                    >${this.#escapeHtml(value)}</textarea>
+                `;
+            case 'number':
+                return `
+                    <input 
+                        type="number"
+                        ${baseAttrs}
+                        value="${this.#escapeHtml(value)}"
+                    />
+                `;
+            case 'email':
+                return `
+                    <input 
+                        type="email"
+                        ${baseAttrs}
+                        value="${this.#escapeHtml(value)}"
+                    />
+                `;
+            case 'text':
+            default:
+                return `
+                    <input 
+                        type="text"
+                        ${baseAttrs}
+                        value="${this.#escapeHtml(value)}"
+                    />
+                `;
+        }
+    }
+
+    // Utility method to escape HTML to prevent XSS
+    #escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    /** Handle the dialog confirm action */
+    async handleDialogConfirm(data, type) {
+        const newData = {};
+        this.querySelectorAll('.form-input').forEach(input => {
+            newData[input.dataset.column] = input.value;
+        });
+
+        if (type === 'create') await this.#dataService.create(newData);
+        if (type === 'edit') await this.#dataService.update(newData);
+
+        this.dialog.close();
+
+        // Reload data
+        this.#loadData();
     }
 
     addEventListeners() {
@@ -359,14 +366,18 @@ class DataTable extends HTMLElement {
             });
         });
 
+        this.querySelector('.add')?.addEventListener('click', () => {
+            this.openDialog('Create New Entry', {}, DialogType.CREATE);
+        });
+
         const buttons = this.querySelectorAll('tbody button');
         buttons.forEach((button) => {
             button.addEventListener('click', (e) => {
                 const action = e.target.textContent.toLowerCase();
                 const rowId = e.target.closest('tr').getAttribute('data-row-index'); // Assuming rows have IDs
-                if (action === 'view') this.handleView(rowId);
-                if (action === 'edit') this.handleEdit(rowId);
-                if (action === 'delete') this.handleDelete(rowId);
+                if (action === 'view') this.openDialog('View Details', this.#data[rowId], DialogType.VIEW);
+                if (action === 'edit') this.openDialog('Edit Details', this.#data[rowId], DialogType.EDIT);
+                if (action === 'delete') this.openDialog('Delete Entry', this.#data[rowId], DialogType.DELETE);
             });
         });
     }
@@ -383,32 +394,14 @@ class DataTable extends HTMLElement {
             timeout = setTimeout(later, wait);
         };
     }
-
-    handleView(rowIndex) {
-        const rowData = this.#data[rowIndex];
-        alert(`View clicked for row: ${JSON.stringify(rowData)}`);
-    }
-
-    handleEdit(rowIndex) {
-        const rowData = this.#data[rowIndex];
-        alert(`Edit clicked for row: ${JSON.stringify(rowData)}`);
-    }
-
-    handleDelete(rowIndex) {
-        const rowData = this.#data[rowIndex];
-        alert(`Delete clicked for row: ${JSON.stringify(rowData)}`);
-
-        const url = this.#buildUrl('delete');
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        });
-    }
-
 }
 
 // Define the custom element
 customElements.define('data-table', DataTable);
+
+const DialogType = {
+    VIEW: 'view',
+    CREATE: 'create',
+    EDIT: 'edit',
+    DELETE: 'delete'
+}
