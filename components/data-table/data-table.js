@@ -49,8 +49,7 @@ class DataTable extends HTMLElement {
 
     /** Fetch data from the server with filters and pagination */
     async #fetchData() {
-        // Add filters to POST body if they exist replacing camelCase with underscores in lowercase
-        const filters = Object.fromEntries([...this.#activeFilters.entries()].map(([key, value]) => [key.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase(), value]));
+        const filters = Object.fromEntries([...this.#activeFilters.entries()]);
         // Pagination
         filters.limit = this.#rowsPerPage;
         filters.offset = (this.#currentPage - 1) * this.#rowsPerPage;

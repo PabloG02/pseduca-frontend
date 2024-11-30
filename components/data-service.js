@@ -23,7 +23,8 @@ export default class DataService {
             });
 
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            return await response.json();
+            const responseData = await response.json();
+            return this.#transformResponseKeysCamelToSnake(responseData);
         } catch (error) {
             console.error('Data fetch failed:', error);
             return { data: [], total_count: 0 };
@@ -42,7 +43,7 @@ export default class DataService {
         const url = this.buildUrl(action);
         const formData = new FormData();
         Object.entries(data).forEach(([key, value]) => {
-            formData.append(key, value);
+            formData.append(this.#camelToSnakeCase(key), value);
         });
 
         const response = await fetch(url, {
@@ -63,5 +64,22 @@ export default class DataService {
             method: 'POST',
             body: formData
         });
+    }
+
+    #camelToSnakeCase(key) {
+        return key.replace(/([A-Z])/g, '_$1').toLowerCase();
+    }
+
+    #transformResponseKeysCamelToSnake(obj) {
+        if (Array.isArray(obj)) {
+            return obj.map(item => this.#transformResponseKeysCamelToSnake(item));
+        } else if (obj !== null && typeof obj === 'object') {
+            return Object.keys(obj).reduce((acc, key) => {
+                const newKey = this.#camelToSnakeCase(key);
+                acc[newKey] = this.#transformResponseKeysCamelToSnake(obj[key]);
+                return acc;
+            }, {});
+        }
+        return obj;
     }
 }
