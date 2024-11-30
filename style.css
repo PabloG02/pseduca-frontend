@@ -193,6 +193,7 @@ img, svg {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 /* Top header */
@@ -251,7 +252,7 @@ img, svg {
 
 /* Bottom header */
 .bottom-header {
-    height: 100px;
+    min-height: 100px;
 }
 
 .pseduca-logo {
@@ -275,6 +276,80 @@ img, svg {
     font-size: var(--text-lg-font-size);
     line-height: var(--text-lg-line-height);
 }
+
+/* Responsive styles */
+.mobile-menu-toggle {
+    display: none;
+    height: 100px;
+    align-content: center;
+    cursor: pointer;
+
+    input {
+        display: none;
+    }
+}
+
+@media (width < 1280px) {
+    .mobile-menu-toggle {
+        display: block;
+        position: relative;
+
+        input {
+            display: initial;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        input:focus-visible + label {
+            outline: 2px solid #000;
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+    }
+
+    .nav-menu {
+        flex-basis: 100%;
+
+        ul {
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding-block: 10px 30px;
+        }
+    }
+
+    @supports not (height: calc-size(max-content, size)) {
+        .nav-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+
+        .mobile-menu-toggle:has(input:checked) ~ .nav-menu {
+            max-height: 1000px; /* Adjust based on your content height */
+        }
+    }
+
+    @supports (height: calc-size(max-content, size)) {
+        .nav-menu {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.35s ease;
+        }
+
+        .mobile-menu-toggle:has(input:checked) ~ .nav-menu {
+            height: calc-size(max-content, size);
+        }
+    }
+}
+
 
 /* Footer */
 footer {
