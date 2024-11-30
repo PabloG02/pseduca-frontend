@@ -92,6 +92,8 @@ class DataTable extends HTMLElement {
         const trFilters = document.createElement('tr');
 
         columns.forEach((col) => {
+            if (col.showIn !== undefined && !col.showIn.includes('table')) return;
+
             const thLabel = document.createElement('th');
             const thFilter = document.createElement('th');
             const label = col.label || col.name;
@@ -101,13 +103,30 @@ class DataTable extends HTMLElement {
 
             // Add a filter input if the column is filterable
             if (col.filterable) {
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.className = 'filter-input';
-                input.placeholder = `Filter ${label}`;
-                input.dataset.column = col.name;
+                if (col.type === 'date') {
+                    const inputFrom = document.createElement('input');
+                    inputFrom.type = 'date';
+                    inputFrom.className = 'filter-input';
+                    inputFrom.placeholder = `From ${label}`;
+                    inputFrom.dataset.column = col.name;
 
-                thFilter.appendChild(input);
+                    const inputTo = document.createElement('input');
+                    inputTo.type = 'date';
+                    inputTo.className = 'filter-input';
+                    inputTo.placeholder = `To ${label}`;
+                    inputTo.dataset.column = col.name;
+
+                    thFilter.appendChild(inputFrom);
+                    thFilter.appendChild(inputTo);
+                } else {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'filter-input';
+                    input.placeholder = `Filter ${label}`;
+                    input.dataset.column = col.name;
+
+                    thFilter.appendChild(input);
+                }
             }
 
             trLabels.appendChild(thLabel);
@@ -132,6 +151,8 @@ class DataTable extends HTMLElement {
 
             // Add data cells
             columns.forEach((col) => {
+                if (col.showIn !== undefined && !col.showIn.includes('table')) return;
+
                 const td = document.createElement('td');
                 td.textContent = this.#formatCell(row[col.name], col.type);
                 tr.appendChild(td);
@@ -249,6 +270,8 @@ class DataTable extends HTMLElement {
         let content = '';
 
         this.parseJSON('columns').forEach(col => {
+            if (col.showIn !== undefined && !col.showIn.includes(mode)) return;
+
             const value = data[col.name] || '';
             const isReadOnly = mode === DialogType.VIEW || (mode === DialogType.EDIT && col?.id);
 
@@ -292,6 +315,22 @@ class DataTable extends HTMLElement {
                 return `
                     <input 
                         type="email"
+                        ${baseAttrs}
+                        value="${this.#escapeHtml(value)}"
+                    />
+                `;
+            case 'boolean':
+                return `
+                    <input
+                        type="checkbox"
+                        ${baseAttrs}
+                        ${value ? 'checked' : ''}
+                    />
+                `;
+            case 'date':
+                return `
+                    <input 
+                        type="date"
                         ${baseAttrs}
                         value="${this.#escapeHtml(value)}"
                     />

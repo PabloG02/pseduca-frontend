@@ -27,10 +27,14 @@ data-table {
 
     .filter-input {
         width: 100%;
-        padding: 8px 32px 8px 10px;
+        padding: 8px 10px;
         border: 1px solid #e5e7eb;
         border-radius: 4px;
         background: white;
+    }
+
+    input[type="text"].filter-input {
+        padding: 8px 32px 8px 10px;
     }
 
     .filter-icon {
