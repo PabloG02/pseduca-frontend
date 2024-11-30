@@ -102,28 +102,48 @@ class DataTable extends HTMLElement {
 
             // Add a filter input if the column is filterable
             if (col.filterable) {
-                if (col.type === 'date') {
-                    const inputFrom = document.createElement('input');
-                    inputFrom.type = 'date';
-                    inputFrom.className = 'filter-input';
-                    inputFrom.placeholder = `From ${label}`;
-                    inputFrom.dataset.column = col.name;
-
-                    const inputTo = document.createElement('input');
-                    inputTo.type = 'date';
-                    inputTo.className = 'filter-input';
-                    inputTo.placeholder = `To ${label}`;
-                    inputTo.dataset.column = col.name;
-
-                    thFilter.appendChild(inputFrom);
-                    thFilter.appendChild(inputTo);
-                } else {
+                // Create filter inputs based on the column type
+                const createFilterInput = (type, placeholder, colName) => {
                     const input = document.createElement('input');
-                    input.type = 'text';
+                    input.type = type;
                     input.className = 'filter-input';
-                    input.placeholder = `Filter ${label}`;
-                    input.dataset.column = col.name;
+                    input.placeholder = placeholder;
+                    input.dataset.column = colName;
+                    return input;
+                };
 
+                if (col.type === 'boolean') {
+                    // Create a dropdown filter for boolean values
+                    const select = document.createElement('select');
+                    select.className = 'filter-input';
+                    select.dataset.column = col.name;
+
+                    // Add options for "No filter", "True", and "False"
+                    const noFilterOption = document.createElement('option');
+                    noFilterOption.value = '';
+                    noFilterOption.textContent = `No filter`;
+
+                    const trueOption = document.createElement('option');
+                    trueOption.value = 'true';
+                    trueOption.textContent = `True`;
+
+                    const falseOption = document.createElement('option');
+                    falseOption.value = 'false';
+                    falseOption.textContent = `False`;
+
+                    select.append(noFilterOption, trueOption, falseOption);
+                    thFilter.appendChild(select);
+                } else if (col.type === 'date') {
+                    // Create "From" and "To" date filter inputs
+                    const inputFrom = createFilterInput('date', `From ${label}`, `${col.name}_from`);
+                    const inputTo = createFilterInput('date', `To ${label}`, `${col.name}_to`);
+                    const div = document.createElement('div');
+                    div.style.display = 'grid';
+                    div.append(inputFrom, inputTo);
+                    thFilter.appendChild(div);
+                } else {
+                    // Create a text input filter
+                    const input = createFilterInput('text', `Filter ${label}`, col.name);
                     thFilter.appendChild(input);
                 }
             }
@@ -360,7 +380,11 @@ class DataTable extends HTMLElement {
     async handleDialogConfirm(data, type) {
         const newData = {};
         this.querySelectorAll('.form-input').forEach(input => {
-            newData[input.dataset.column] = input.value;
+            if (input.type === 'date') {
+                newData[input.dataset.column] = new Date(input.value).toISOString();
+            } else {
+                newData[input.dataset.column] = input.value;
+            }
         });
 
         if (type === 'create') await this.#dataService.create(newData);
@@ -375,9 +399,13 @@ class DataTable extends HTMLElement {
     addEventListeners() {
         // Filter listeners
         this.querySelectorAll('.filter-input').forEach(filter => {
-            filter.addEventListener('input', this.#debounce((e) => {
+            filter.oninput = this.#debounce((e) => {
                 const column = e.target.dataset.column;
-                const value = e.target.value.trim();
+                let value = e.target.value.trim();
+
+                if (e.target.type === 'date' && value) {
+                    value = new Date(value).toISOString();
+                }
 
                 if (value) {
                     this.#activeFilters.set(column, value);
@@ -387,7 +415,7 @@ class DataTable extends HTMLElement {
 
                 this.#currentPage = 1; // Reset to first page when filtering
                 this.#loadData(); // Fetch new filtered data
-            }, 300));
+            }, 300);
         });
 
         // Pagination listeners
