@@ -12,7 +12,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
           rel="stylesheet">
 
-    <script src="components/svg-icon.js" defer></script>
+    <script src="src/js/components/svg-icon.js" defer></script>
+
+    <script type="speculationrules">
+        {
+          "prefetch": [{
+            "where": {
+              "href_matches": "/*"
+            },
+            "eagerness": "moderate"
+          }]
+        }
+    </script>
 </head>
 <body>
 <header class="uvigo-bg">

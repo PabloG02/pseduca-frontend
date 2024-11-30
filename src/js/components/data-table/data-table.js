@@ -1,4 +1,4 @@
-import DataService from "../data-service.js";
+import DataService from "../../common/data-service.js";
 import CustomDialog from "../custom-dialog/custom-dialog.js";
 
 class DataTable extends HTMLElement {
