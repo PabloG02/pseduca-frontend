@@ -276,9 +276,11 @@ class DataTable extends HTMLElement {
             options.showFooter = false;
         }
 
+        let content = type === DialogType.DELETE ? 'Are you sure you want to delete this entry?' : this.#generateDialogFormContent(data, type);
+
         this.dialog.open(
             title,
-            this.#generateDialogFormContent(data, type), // TODO: handle delete
+            content,
             () => this.handleDialogConfirm(data, type),
             options
         );
@@ -387,8 +389,17 @@ class DataTable extends HTMLElement {
             }
         });
 
-        if (type === 'create') await this.#dataService.create(newData);
-        if (type === 'edit') await this.#dataService.update(newData);
+        switch (type) {
+            case DialogType.CREATE:
+                await this.#dataService.create(newData);
+                break;
+            case DialogType.EDIT:
+                await this.#dataService.update(newData);
+                break;
+            case DialogType.DELETE:
+                await this.#dataService.delete(data);
+                break;
+        }
 
         this.dialog.close();
 
@@ -443,7 +454,10 @@ class DataTable extends HTMLElement {
                 const rowId = e.target.closest('tr').getAttribute('data-row-index'); // Assuming rows have IDs
                 if (action === 'view') this.openDialog('View Details', this.#data[rowId], DialogType.VIEW);
                 if (action === 'edit') this.openDialog('Edit Details', this.#data[rowId], DialogType.EDIT);
-                if (action === 'delete') this.openDialog('Delete Entry', this.#data[rowId], DialogType.DELETE);
+                if (action === 'delete') {
+                    const idField = this.parseJSON('columns').find(col => col.id)?.name;
+                    this.openDialog('Delete Entry', { [idField]: this.#data[rowId][idField] }, DialogType.DELETE);
+                }
             });
         });
     }

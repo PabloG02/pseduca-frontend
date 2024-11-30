@@ -58,7 +58,7 @@ export default class DataService {
     async delete(id) {
         const url = this.buildUrl('delete');
         const formData = new FormData();
-        formData.append('id', id);
+        formData.append(Object.keys(id)[0], Object.values(id)[0]);
 
         return fetch(url, {
             method: 'POST',
