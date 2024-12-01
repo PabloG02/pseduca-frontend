@@ -2,7 +2,7 @@ body {
     background-color: var(--bg-blue-uvigo-700);
 }
 
-.login-section {
+:is(.login-section, .register-section) {
     padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
@@ -67,7 +67,7 @@ body {
     }
 }
 
-.login-button {
+:is(.login-button, .register-button) {
     width: 100%;
     padding: 0.625rem 1.25rem;
     background-color: var(--bg-blue-uvigo-700);
@@ -81,11 +81,11 @@ body {
     transition: background-color 0.2s;
 }
 
-.login-button:hover {
+:is(.login-button, .register-button):hover {
     background-color: var(--bg-blue-uvigo-500);
 }
 
-.login-button:focus {
+:is(.login-button, .register-button):focus {
     outline: none;
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-blue-uvigo-300) 50%, transparent);
 }

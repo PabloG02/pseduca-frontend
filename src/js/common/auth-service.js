@@ -50,7 +50,7 @@ export default class AuthService {
     }
 
     getAuthToken() {
-        return localStorage.getItem('authData');
+        return localStorage.getItem('authToken');
     }
 
     logout() {

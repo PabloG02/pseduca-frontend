@@ -44,32 +44,34 @@
 
 <!-- Specific page content -->
 
-<main class="login-section">
+<main class="register-section">
     <a class="pseduca-logo" href="index.html">PsEduca</a>
 
     <div class="card">
-        <h1 class="card-title">Identificación de usuario</h1>
+        <h1 class="card-title">Registro de usuario</h1>
 
         <form action="#">
+            <div class="form-group">
+                <label class="form-label" for="name">Nombre y apellidos</label>
+                <input class="form-input" id="name" name="name" required type="text">
+            </div>
+
             <div class="form-group">
                 <label class="form-label" for="username">Nombre de usuario</label>
                 <input class="form-input" id="username" name="username" required type="text">
             </div>
 
             <div class="form-group">
-                <div class="password-label-and-remember">
-                    <label class="form-label" for="password">Contraseña</label>
-                    <a class="link" href="#">¿Olvidaste tu contraseña?</a>
-                </div>
+                <label class="form-label" for="email">Correo electrónico</label>
+                <input class="form-input" id="email" name="email" required type="email">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">Contraseña</label>
                 <input class="form-input" id="password" name="password" required type="password">
             </div>
 
-            <button class="login-button" type="submit">Iniciar sesión</button>
-
-            <p class="signup-text">
-                ¿Aún no tienes cuenta?
-                <a class="link" href="signup.html">Regístrate</a>
-            </p>
+            <button class="register-button" type="submit">Crear cuenta</button>
         </form>
     </div>
 </main>
