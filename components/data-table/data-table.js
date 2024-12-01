@@ -389,22 +389,24 @@ class DataTable extends HTMLElement {
             }
         });
 
-        switch (type) {
-            case DialogType.CREATE:
-                await this.#dataService.create(newData);
-                break;
-            case DialogType.EDIT:
-                await this.#dataService.update(newData);
-                break;
-            case DialogType.DELETE:
-                await this.#dataService.delete(data);
-                break;
+        if (validateAllFields){
+            switch (type) {
+                case DialogType.CREATE:
+                    await this.#dataService.create(newData);
+                    break;
+                case DialogType.EDIT:
+                    await this.#dataService.update(newData);
+                    break;
+                case DialogType.DELETE:
+                    await this.#dataService.delete(data);
+                    break;
+            }
+    
+            this.dialog.close();
+    
+            // Reload data
+            this.#loadData();
         }
-
-        this.dialog.close();
-
-        // Reload data
-        this.#loadData();
     }
 
     addEventListeners() {
@@ -441,6 +443,11 @@ class DataTable extends HTMLElement {
                     await this.#loadData();
                 }
             });
+        });
+
+        //Dialog Input Listeners
+        this.querySelector('.form-input').forEach(input => {
+            input.addEventListener('click', () => test());
         });
 
         this.querySelector('.add')?.addEventListener('click', () => {
