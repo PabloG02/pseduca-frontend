@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PsEduca | Universidad de Vigo</title>
+    <title data-i18n="page.title">PsEduca | Universidad de Vigo</title>
     <link href="style.css" rel="stylesheet"/>
     <link href="landing.css" rel="stylesheet"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+
+    <script src="src/js/common/i18n-manager.js" type="module" defer></script>
 
     <script src="src/js/components/svg-icon.js" defer></script>
 </head>
@@ -22,7 +24,7 @@
         <div class="top-links">
             <a href="signin.html" class="sign-in" aria-label="Iniciar sesión">
                 <svg-icon src="/assets/fluent-ui-icons/person-20-filled.svg" aria-hidden="true"></svg-icon>
-                <span>Iniciar sesión</span>
+                <span data-i18n="navigation.signin">Iniciar sesión</span>
             </a>
             <ul class="language-list">
                 <li><a href="#" lang="gl" aria-label="Galego">GL</a></li>
@@ -44,12 +46,12 @@
     </div>
     <nav class="nav-menu" role="navigation" aria-label="Main navigation">
         <ul>
-            <li><a href="#">Recursos</a></li>
-            <li><a href="#">Pruebas y programas</a></li>
-            <li><a href="#">Formación</a></li>
-            <li><a href="#">Divulgación</a></li>
-            <li><a href="#">Investigación</a></li>
-            <li><a href="#">Contacto</a></li>
+            <li><a href="#" data-i18n="navigation.resources">Recursos</a></li>
+            <li><a href="#" data-i18n="navigation.tests-and-programs">Pruebas y programas</a></li>
+            <li><a href="#" data-i18n="navigation.academic-programs">Formación</a></li>
+            <li><a href="#" data-i18n="navigation.divulgation">Divulgación</a></li>
+            <li><a href="#" data-i18n="navigation.research">Investigación</a></li>
+            <li><a href="#" data-i18n="navigation.contact">Contacto</a></li>
         </ul>
     </nav>
 </div>
@@ -70,11 +72,11 @@
         <div class="feature-card">
             <svg-icon src="assets/fluent-ui-icons/library-28-filled.svg" class="resources-icon"></svg-icon>
             <div>
-                <h5>Resources</h5>
-                <p>Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
+                <h5 data-i18n="features.resources.title">Resources</h5>
+                <p data-i18n="features.resources.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
             </div>
             <a href="#" class="read-more">
-                <span>Read more</span>
+                <span data-i18n="common.read-more">Read more</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
                     <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
                 </svg>
@@ -84,11 +86,11 @@
         <div class="feature-card">
             <svg-icon src="assets/fluent-ui-icons/news-28-filled.svg" class="articles-icon"></svg-icon>
             <div>
-                <h5>Articles</h5>
-                <p>Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
+                <h5 data-i18n="features.articles.title">Articles</h5>
+                <p data-i18n="features.articles.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
             </div>
             <a href="#" class="read-more">
-                <span>Read more</span>
+                <span data-i18n="common.read-more">Read more</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
                     <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
                 </svg>
@@ -98,11 +100,11 @@
         <div class="feature-card">
             <svg-icon src="assets/fluent-ui-icons/hat-graduation-28-filled.svg" class="academic-programs-icon"></svg-icon>
             <div>
-                <h5>Academic programs</h5>
-                <p>Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
+                <h5 data-i18n="features.academic-programs.title">Academic programs</h5>
+                <p data-i18n="features.academic-programs.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
             </div>
             <a href="#" class="read-more">
-                <span>Read more</span>
+                <span data-i18n="common.read-more">Read more</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
                     <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
                 </svg>
@@ -112,8 +114,8 @@
         <div class="feature-card">
             <svg-icon src="assets/fluent-ui-icons/book-28-filled.svg" class="research-icon"></svg-icon>
             <div>
-                <h5>Research</h5>
-                <p>Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
+                <h5 data-i18n="features.research.title">Research</h5>
+                <p data-i18n="features.research.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
             </div>
             <a href="#" class="read-more">
                 <span>Read more</span>
@@ -140,7 +142,7 @@
                 <div class="expand-button">
                     <input type="checkbox" id="expand-footer-toggle" aria-controls="expandable-footer-content">
                     <label for="expand-footer-toggle" aria-label="Expandir contenido del pie de página">
-                        <span class="button-text">Ver más</span>
+                        <span class="button-text" data-i18n="footer.expand-content">Ver más</span>
                     </label>
                 </div>
             </div>
@@ -148,7 +150,7 @@
             <div class="expandable-content">
                 <div class="contact-information">
                     <div class="contact-info">
-                        <p>INFORMACIÓN</p>
+                        <p data-i18n="footer.contact.title">INFORMACIÓN</p>
                         <p>+34 986 812 000</p>
                         <a href="mailto:informacion@uvigo.gal">informacion@uvigo.gal</a>
                     </div>
@@ -170,12 +172,12 @@
                 </div>
 
                 <div class="additional-links">
-                    <a href="https://www.uvigo.gal/contacto">Contacto</a>
-                    <a href="https://secretaria.uvigo.gal/uv/web/qsp/">Caixa de queixas, suxestións e parabéns</a>
-                    <a href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo">Outras webs institucionais</a>
-                    <a href="http://campusdomar.es" id="campus-do-mar">CAMPUS DO MAR</a>
-                    <a href="https://transparencia.uvigo.es">Transparencia</a>
-                    <a href="https://www.uvigo.gal/campus/emerxencias">Emerxencias</a>
+                    <a href="https://www.uvigo.gal/contacto" data-i18n="footer.links.contact">Contacto</a>
+                    <a href="https://secretaria.uvigo.gal/uv/web/qsp/" data-i18n="footer.links.suggestions">Caixa de queixas, suxestións e parabéns</a>
+                    <a href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo" data-i18n="footer.links.other-webs">Outras webs institucionais</a>
+                    <a href="http://campusdomar.es" id="campus-do-mar" data-i18n="footer.links.campus-do-mar">CAMPUS DO MAR</a>
+                    <a href="https://transparencia.uvigo.es" data-i18n="footer.links.transparency">Transparencia</a>
+                    <a href="https://www.uvigo.gal/campus/emerxencias" data-i18n="footer.links.emergencies">Emerxencias</a>
                 </div>
 
                 <div class="social-media">
@@ -201,9 +203,9 @@
 
                 <nav class="bottom-links">
                     <ul>
-                        <li><a href="https://www.uvigo.gal/aviso-legal">Aviso legal</a></li>
-                        <li><a href="https://www.uvigo.gal/proteccion-datos">Protección de datos</a></li>
-                        <li><a href="https://www.uvigo.gal/accesibilidade">Accesibilidade</a></li>
+                        <li><a href="https://www.uvigo.gal/aviso-legal" data-i18n="footer.legal.terms">Aviso legal</a></li>
+                        <li><a href="https://www.uvigo.gal/proteccion-datos" data-i18n="footer.legal.data-protection">Protección de datos</a></li>
+                        <li><a href="https://www.uvigo.gal/accesibilidade" data-i18n="footer.legal.accessibility">Accesibilidade</a></li>
                     </ul>
                 </nav>
             </div>
