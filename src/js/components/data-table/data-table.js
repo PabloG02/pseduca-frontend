@@ -241,7 +241,7 @@ class DataTable extends HTMLElement {
             ${tableBody}
           </table>
           ${pagination}
-          <custom-dialog></custom-dialog>
+          <custom-dialog data-controller="${this.getAttribute('data-controller')}"></custom-dialog>
         `;
 
         this.addEventListeners();

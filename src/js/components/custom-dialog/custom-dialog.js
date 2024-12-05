@@ -1,5 +1,11 @@
 export default class CustomDialog extends HTMLElement {
-    connectedCallback() {
+    #validator;
+
+    static get observedAttributes() {
+        return ['data-controller'];
+    }
+
+    async connectedCallback() {
         this.innerHTML = `
             <dialog>
                 <header class="dialog-header">
@@ -16,18 +22,51 @@ export default class CustomDialog extends HTMLElement {
         this.dialog = this.querySelector('dialog');
         this.querySelector('.close-button').onclick = () => this.close();
         this.querySelector('.cancel-button').onclick = () => this.close();
+
+        const modulePath = `../../validators/${this.getAttribute('data-controller')}-validator.js`;
+        const ValidatorClass = await import(modulePath);
+        this.#validator = new ValidatorClass.default();
     }
 
     open(title, content, onConfirm, options = {}) {
         this.querySelector('#dialog-title').textContent = title;
         this.querySelector('#dialog-description').innerHTML = content;
-        this.querySelector('.confirm-button').onclick = onConfirm;
+        this.querySelector('.confirm-button').onclick = () => {
+            const inputs = this.querySelectorAll('.form-input');
+            let allValid = true;
+
+            inputs.forEach(input => {
+                try {
+                    const isValid = this.#validator.validate(input.dataset.column, input.value);
+                    if (!isValid) {
+                        allValid = false;
+                    }
+                } catch (error) {
+                    console.warn(error);
+                }
+            });
+
+            if (allValid) {
+                onConfirm();
+            }
+        };
 
         if (options.showFooter === false) {
             this.querySelector('.dialog-footer').style.display = 'none';
         } else {
             this.querySelector('.dialog-footer').style.display = 'flex';
         }
+
+        this.querySelectorAll('.form-input').forEach(input => {
+            input.oninput = (event) => {
+                try {
+                    const isValid = this.#validator.validate(input.dataset.column, input.value);
+                    console.log(isValid);
+                } catch (error) {
+                    console.warn(error);
+                }
+            }
+        });
 
         this.dialog.showModal();
     }
