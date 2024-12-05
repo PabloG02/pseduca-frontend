@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-i18n="page.title">PsEduca | Universidad de Vigo</title>
-    <link href="style.css" rel="stylesheet" />
-    <link href="landing.css" rel="stylesheet" />
+    <title>PsEduca | Universidad de Vigo</title>
+    <link href="../style.css" rel="stylesheet" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,9 +13,21 @@
       rel="stylesheet"
     />
 
-    <script src="src/js/common/i18n-manager.js" type="module" defer></script>
+    <link
+      rel="stylesheet"
+      href="../src/js/components/data-table/data-table.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../src/js/components/custom-dialog/custom-dialog.css"
+    />
 
-    <script src="src/js/components/svg-icon.js" defer></script>
+    <script src="../src/js/components/svg-icon.js" defer></script>
+    <script
+      src="../src/js/components/data-table/data-table.js"
+      type="module"
+      defer
+    ></script>
   </head>
   <body>
     <header class="uvigo-bg">
@@ -29,12 +40,12 @@
           <svg-icon src="/assets/logo-uvigo.svg"></svg-icon>
         </a>
         <div class="top-links">
-          <a href="signin.html" class="sign-in" aria-label="Iniciar sesión">
+          <a href="../signin.html" class="sign-in" aria-label="Iniciar sesión">
             <svg-icon
               src="/assets/fluent-ui-icons/person-20-filled.svg"
               aria-hidden="true"
             ></svg-icon>
-            <span data-i18n="navigation.signin">Iniciar sesión</span>
+            <span>Iniciar sesión</span>
           </a>
           <ul class="language-list">
             <li><a href="#" lang="gl" aria-label="Galego">GL</a></li>
@@ -77,136 +88,16 @@
 
     <!-- Specific page content -->
 
-    <section class="hero" aria-label="Hero section"></section>
-
-    <main>
-      <section class="uvigo-bg">
-        <div class="container about">
-          <h2>PsEduca</h2>
-          <p data-i18n="hero-section.description">
-            PsEduca es un proyecto de la Universidad de Vigo que tiene como
-            objetivo principal la divulgación de la psicología educativa. En
-            esta web encontrarás recursos, pruebas y programas, formación,
-            divulgación e investigación en el ámbito de la psicología educativa.
-          </p>
-        </div>
-      </section>
-
-      <section class="container feature-grid">
-        <div class="feature-card">
-          <svg-icon
-            src="assets/fluent-ui-icons/library-28-filled.svg"
-            class="resources-icon"
-          ></svg-icon>
-          <div>
-            <h5 data-i18n="features.resources.title">Resources</h5>
-            <p data-i18n="features.resources.description">
-              Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
-            </p>
-          </div>
-          <a href="#" class="read-more">
-            <span data-i18n="common.read-more">Read more</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="read-more-icon"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </a>
-        </div>
-
-        <div class="feature-card">
-          <svg-icon
-            src="assets/fluent-ui-icons/news-28-filled.svg"
-            class="articles-icon"
-          ></svg-icon>
-          <div>
-            <h5 data-i18n="features.articles.title">Articles</h5>
-            <p data-i18n="features.articles.description">
-              Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
-            </p>
-          </div>
-          <a href="#" class="read-more">
-            <span data-i18n="common.read-more">Read more</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="read-more-icon"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </a>
-        </div>
-
-        <div class="feature-card">
-          <svg-icon
-            src="assets/fluent-ui-icons/hat-graduation-28-filled.svg"
-            class="academic-programs-icon"
-          ></svg-icon>
-          <div>
-            <h5 data-i18n="features.academic-programs.title">
-              Academic programs
-            </h5>
-            <p data-i18n="features.academic-programs.description">
-              Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
-            </p>
-          </div>
-          <a href="#" class="read-more">
-            <span data-i18n="common.read-more">Read more</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="read-more-icon"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </a>
-        </div>
-
-        <div class="feature-card">
-          <svg-icon
-            src="assets/fluent-ui-icons/book-28-filled.svg"
-            class="research-icon"
-          ></svg-icon>
-          <div>
-            <h5 data-i18n="features.research.title">Research</h5>
-            <p data-i18n="features.research.description">
-              Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
-            </p>
-          </div>
-          <a href="#" class="read-more">
-            <span data-i18n="common.read-more">Read more</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="read-more-icon"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </a>
-        </div>
-      </section>
+    <main class="container">
+      <data-table
+        data-controller="webpagetext"
+        data-actions='["view", "edit"]'
+        columns='[
+            {"name": "text_key", "id": true, "type": "text", "label": "ID del texto", "filterable": true},
+            {"name": "text", "label": "Text", "type": "textarea", "filterable": false}
+          ]'
+      >
+      </data-table>
     </main>
 
     <!-- End of specific page content -->
@@ -234,9 +125,7 @@
                 for="expand-footer-toggle"
                 aria-label="Expandir contenido del pie de página"
               >
-                <span class="button-text" data-i18n="footer.expand-content"
-                  >Ver más</span
-                >
+                <span class="button-text" data-i18n="see-more">Ver más</span>
               </label>
             </div>
           </div>
@@ -244,19 +133,21 @@
           <div class="expandable-content">
             <div class="contact-information">
               <div class="contact-info">
-                <p data-i18n="footer.contact.title">INFORMACIÓN</p>
+                <p data-i18n="contact-information.information">INFORMACIÓN</p>
                 <p>+34 986 812 000</p>
                 <a href="mailto:informacion@uvigo.gal">informacion@uvigo.gal</a>
               </div>
               <div class="campus-info">
-                <p>Campus de Ourense</p>
+                <p data-i18n="contact-information.ourense">Campus de Ourense</p>
                 <p>+34 988 387 102</p>
                 <a href="https://www.uvigo.gal/campus/ourense-campus-auga"
                   >Campus Auga</a
                 >
               </div>
               <div class="campus-info">
-                <p>Campus de Pontevedra</p>
+                <p data-i18n="contact-information.pontevedra">
+                  Campus de Pontevedra
+                </p>
                 <p>+34 986 801 949</p>
                 <a href="https://www.uvigo.gal/campus/pontevedra-campus-crea"
                   >Campus CREA</a
@@ -275,33 +166,30 @@
             <div class="additional-links">
               <a
                 href="https://www.uvigo.gal/contacto"
-                data-i18n="footer.links.contact"
+                data-i18n="contact-information.contact"
                 >Contacto</a
               >
               <a
                 href="https://secretaria.uvigo.gal/uv/web/qsp/"
-                data-i18n="footer.links.suggestions"
+                data-i18n="contact-information.complaint-box"
                 >Caixa de queixas, suxestións e parabéns</a
               >
               <a
                 href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo"
-                data-i18n="footer.links.other-webs"
+                data-i18n="contact-information.other-webs"
                 >Outras webs institucionais</a
               >
-              <a
-                href="http://campusdomar.es"
-                id="campus-do-mar"
-                data-i18n="footer.links.campus-do-mar"
+              <a href="http://campusdomar.es" id="campus-do-mar"
                 >CAMPUS DO MAR</a
               >
               <a
                 href="https://transparencia.uvigo.es"
-                data-i18n="footer.links.transparency"
+                data-i18n="contact-information.transparency"
                 >Transparencia</a
               >
               <a
                 href="https://www.uvigo.gal/campus/emerxencias"
-                data-i18n="footer.links.emergencies"
+                data-i18n="contact-information.emergencies"
                 >Emerxencias</a
               >
             </div>
@@ -338,21 +226,21 @@
                 <li>
                   <a
                     href="https://www.uvigo.gal/aviso-legal"
-                    data-i18n="footer.legal.terms"
+                    data-i18n="contact-information.legal-notice"
                     >Aviso legal</a
                   >
                 </li>
                 <li>
                   <a
                     href="https://www.uvigo.gal/proteccion-datos"
-                    data-i18n="footer.legal.data-protection"
+                    data-i18n="contact-information.data-protection"
                     >Protección de datos</a
                   >
                 </li>
                 <li>
                   <a
                     href="https://www.uvigo.gal/accesibilidade"
-                    data-i18n="footer.legal.accessibility"
+                    data-i18n="contact-information.accessibility"
                     >Accesibilidade</a
                   >
                 </li>

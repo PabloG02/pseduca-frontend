@@ -14,7 +14,7 @@
       rel="stylesheet"
     />
 
-    <script src="src/js/pages/signin.js" type="module" defer></script>
+    <script src="src/js/pages/signup.js" type="module" defer></script>
 
     <script src="src/js/components/svg-icon.js" defer></script>
 
@@ -52,20 +52,36 @@
 
     <!-- Specific page content -->
 
-    <main class="login-section">
+    <main class="register-section">
       <a class="pseduca-logo" href="index.html">PsEduca</a>
 
       <div class="card">
-        <h1 class="card-title" data-i18n="login-section.title">
-          Identificación de usuario
+        <h1 class="card-title" data-i18n="register-section.title">
+          Registro de usuario
         </h1>
 
         <form action="#">
           <div class="form-group">
             <label
               class="form-label"
+              for="name"
+              data-i18n="register-section.name-lastname"
+              >Nombre y apellidos</label
+            >
+            <input
+              class="form-input"
+              id="name"
+              name="name"
+              required
+              type="text"
+            />
+          </div>
+
+          <div class="form-group">
+            <label
+              class="form-label"
               for="username"
-              data-i18n="login-section.username"
+              data-i18n="register-section.username"
               >Nombre de usuario</label
             >
             <input
@@ -78,15 +94,28 @@
           </div>
 
           <div class="form-group">
-            <div class="password-label-and-remember">
-              <label
-                class="form-label"
-                for="password"
-                data-i18n="login-section.password"
-                >Contraseña</label
-              >
-              <a class="link" href="#">¿Olvidaste tu contraseña?</a>
-            </div>
+            <label
+              class="form-label"
+              for="email"
+              data-i18n="register-section.email"
+              >Correo electrónico</label
+            >
+            <input
+              class="form-input"
+              id="email"
+              name="email"
+              required
+              type="email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label
+              class="form-label"
+              for="password"
+              data-i18n="register-section.password"
+              >Contraseña</label
+            >
             <input
               class="form-input"
               id="password"
@@ -97,19 +126,12 @@
           </div>
 
           <button
-            class="login-button"
+            class="register-button"
             type="submit"
-            data-i18n="login-section.login"
+            data-i18n="register-section.signup"
           >
-            Iniciar sesión
+            Crear cuenta
           </button>
-
-          <p class="signup-text" data-i18n="login-section.signup-question">
-            ¿Aún no tienes cuenta?
-            <a class="link" href="signup.html" data-i18n="login-section.signup"
-              >Regístrate</a
-            >
-          </p>
         </form>
       </div>
     </main>
