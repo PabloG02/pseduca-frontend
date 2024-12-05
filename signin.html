@@ -1,80 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>PsEduca | Universidad de Vigo</title>
-    <link href="style.css" rel="stylesheet"/>
-    <link href="sign-in-up.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet" />
+    <link href="sign-in-up.css" rel="stylesheet" />
 
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
+      rel="stylesheet"
+    />
 
     <script src="src/js/pages/signin.js" type="module" defer></script>
 
     <script src="src/js/components/svg-icon.js" defer></script>
 
     <script type="speculationrules">
-        {
-          "prefetch": [{
+      {
+        "prefetch": [
+          {
             "where": {
               "href_matches": "/*"
             },
             "eagerness": "moderate"
-          }]
-        }
+          }
+        ]
+      }
     </script>
-</head>
-<body>
-<header class="uvigo-bg">
-    <div class="container top-header">
-        <a aria-label="Universidad de Vigo" class="logo" href="https://www.uvigo.gal/">
-            <svg-icon src="/assets/logo-uvigo.svg"></svg-icon>
+  </head>
+  <body>
+    <header class="uvigo-bg">
+      <div class="container top-header">
+        <a
+          aria-label="Universidad de Vigo"
+          class="logo"
+          href="https://www.uvigo.gal/"
+        >
+          <svg-icon src="/assets/logo-uvigo.svg"></svg-icon>
         </a>
         <div class="top-links">
-            <ul class="language-list">
-                <li><a aria-label="Galego" href="#" lang="gl">GL</a></li>
-                <li><a aria-label="Español" href="#" lang="es">ES</a></li>
-            </ul>
+          <ul class="language-list">
+            <li><a aria-label="Galego" href="#" lang="gl">GL</a></li>
+            <li><a aria-label="Español" href="#" lang="es">ES</a></li>
+          </ul>
         </div>
-    </div>
-</header>
+      </div>
+    </header>
 
-<!-- Specific page content -->
+    <!-- Specific page content -->
 
-<main class="login-section">
-    <a class="pseduca-logo" href="index.html">PsEduca</a>
+    <main class="login-section">
+      <a class="pseduca-logo" href="index.html">PsEduca</a>
 
-    <div class="card">
-        <h1 class="card-title">Identificación de usuario</h1>
+      <div class="card">
+        <h1 class="card-title" data-i18n="login-section.title">
+          Identificación de usuario
+        </h1>
 
         <form action="#">
-            <div class="form-group">
-                <label class="form-label" for="username">Nombre de usuario</label>
-                <input class="form-input" id="username" name="username" required type="text">
+          <div class="form-group">
+            <label
+              class="form-label"
+              for="username"
+              data-i18n="login-section.username"
+              >Nombre de usuario</label
+            >
+            <input
+              class="form-input"
+              id="username"
+              name="username"
+              required
+              type="text"
+            />
+          </div>
+
+          <div class="form-group">
+            <div class="password-label-and-remember">
+              <label
+                class="form-label"
+                for="password"
+                data-i18n="login-section.password"
+                >Contraseña</label
+              >
+              <a class="link" href="#">¿Olvidaste tu contraseña?</a>
             </div>
+            <input
+              class="form-input"
+              id="password"
+              name="password"
+              required
+              type="password"
+            />
+          </div>
 
-            <div class="form-group">
-                <div class="password-label-and-remember">
-                    <label class="form-label" for="password">Contraseña</label>
-                    <a class="link" href="#">¿Olvidaste tu contraseña?</a>
-                </div>
-                <input class="form-input" id="password" name="password" required type="password">
-            </div>
+          <button
+            class="login-button"
+            type="submit"
+            data-i18n="login-section.login"
+          >
+            Iniciar sesión
+          </button>
 
-            <button class="login-button" type="submit">Iniciar sesión</button>
-
-            <p class="signup-text">
-                ¿Aún no tienes cuenta?
-                <a class="link" href="signup.html">Regístrate</a>
-            </p>
+          <p class="signup-text" data-i18n="login-section.signup-question">
+            ¿Aún no tienes cuenta?
+            <a class="link" href="signup.html" data-i18n="login-section.signup"
+              >Regístrate</a
+            >
+          </p>
         </form>
-    </div>
-</main>
+      </div>
+    </main>
 
-<!-- End of specific page content -->
-
-</body>
+    <!-- End of specific page content -->
+  </body>
 </html>
