@@ -37,8 +37,8 @@ export default class CustomDialog extends HTMLElement {
 
             inputs.forEach(input => {
                 try {
-                    const isValid = this.#validator.validate(input.dataset.column, input.value);
-                    if (!isValid) {
+                    const errors = this.#validator.validateField(input.dataset.column, input.value);
+                    if (errors.length > 0) {
                         allValid = false;
                     }
                 } catch (error) {
@@ -59,9 +59,34 @@ export default class CustomDialog extends HTMLElement {
 
         this.querySelectorAll('.form-input').forEach(input => {
             input.oninput = (event) => {
+                const parentElement = input.parentElement;
+                const previousError = parentElement.querySelector('.message');
+
                 try {
-                    const isValid = this.#validator.validate(input.dataset.column, input.value);
-                    console.log(isValid);
+                    // Validate the input value
+                    const errors = this.#validator.validateField(input.dataset.column, input.value);
+
+                    // Remove the error message and class if the input is valid
+                    if (previousError && errors.length === 0) {
+                        previousError.remove();
+                        parentElement.classList.remove('error');
+                    }
+
+                    // If the input is invalid, add an error message and error class
+                    if (errors.length > 0) {
+                        let errorElement = document.createElement('p');
+                        if (previousError) {
+                            errorElement = previousError;
+                        }
+                        errorElement.innerHTML = '';
+                        errors.forEach(error => {
+                            errorElement.innerHTML += error.message + '<br>';
+                        });
+                        errorElement.className = 'message';
+
+                        parentElement.classList.add('error');
+                        parentElement.appendChild(errorElement);
+                    }
                 } catch (error) {
                     console.warn(error);
                 }

@@ -20,6 +20,19 @@ export default class InputValidator {
 
         // Merge provided rules with default rules
         this.rules = { ...this.defaultRules, ...rules };
+
+        // Default error messages
+        this.errorMessages = {
+            required: 'This field is required',
+            minLength: (param) => `Minimum length is ${param} characters`,
+            maxLength: (param) => `Maximum length is ${param} characters`,
+            email: 'Invalid email format',
+            numeric: 'Must be a valid number',
+            integer: 'Must be a whole number',
+            alphanumeric: 'Must contain only letters and numbers',
+            url: 'Invalid URL format',
+            phone: 'Invalid phone number format'
+        };
     }
 
     /**
@@ -76,19 +89,10 @@ export default class InputValidator {
      * @returns {string} Error message
      */
     getErrorMessage(rule, param = null) {
-        const messages = {
-            required: 'This field is required',
-            minLength: `Minimum length is ${param} characters`,
-            maxLength: `Maximum length is ${param} characters`,
-            email: 'Invalid email format',
-            numeric: 'Must be a valid number',
-            integer: 'Must be a whole number',
-            alphanumeric: 'Must contain only letters and numbers',
-            url: 'Invalid URL format',
-            phone: 'Invalid phone number format'
-        };
-
-        return messages[rule] || 'Invalid input';
+        if (typeof this.errorMessages[rule] === 'function') {
+            return this.errorMessages[rule](param);
+        }
+        return this.errorMessages[rule] || 'Invalid input';
     }
 
     /**
@@ -101,7 +105,7 @@ export default class InputValidator {
         this.rules[name] = validator;
 
         if (errorMessage) {
-            this.getErrorMessage[name] = () => errorMessage;
+            this.errorMessages[name] = errorMessage;
         }
     }
 }

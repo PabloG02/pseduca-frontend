@@ -31,6 +31,18 @@
     --text-9xl-line-height: 1;
 
     /* Colors */
+    --red-50: rgb(254 242 242);
+    --red-100: rgb(254 226 226);
+    --red-200: rgb(254 202 202);
+    --red-300: rgb(252 165 165);
+    --red-400: rgb(248 113 113);
+    --red-500: rgb(239 68 68);
+    --red-600: rgb(220 38 38);
+    --red-700: rgb(185 28 28);
+    --red-800: rgb(153 27 27);
+    --red-900: rgb(127 29 29);
+    --red-950: rgb(69 10 10);
+
     /* Generated with https://www.genomecolor.space/ #073349 */
     --bg-blue-uvigo-50: #DDE3E6;
     --bg-blue-uvigo-100: #8093A0;
@@ -186,6 +198,32 @@ img, svg {
     outline: none;
     border-color: var(--bg-blue-uvigo-600);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-blue-uvigo-100) 25%, transparent);
+}
+
+.message {
+    font-size: var(--text-sm-font-size);
+    line-height: var(--text-sm-line-height);
+    margin-top: 0.5rem;
+}
+
+.error {
+    > .form-label {
+        color: var(--red-700);
+    }
+
+    > .form-input {
+        color: var(--red-900);
+        border-color: var(--red-500);
+        background-color: var(--red-50);
+
+        &:focus {
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--red-100) 100%, transparent);
+        }
+    }
+
+    > .message {
+        color: var(--red-600);
+    }
 }
 
 /* Header - Common styles */
