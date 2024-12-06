@@ -90,7 +90,7 @@
 }
 
 .research-icon {
-    color: hsl(235, 100%, 60%);
+    color: hsl(215, 100%, 60%);
 }
 
 .academic-programs-icon {
@@ -113,6 +113,7 @@
     justify-content: space-between;
     align-items: center;
     text-decoration: none;
+    margin-top: auto;
 }
 
 .feature-card .read-more-icon {
