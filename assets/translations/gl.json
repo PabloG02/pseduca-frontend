@@ -2,6 +2,7 @@
   "page.title": "PsEduca | Universidade de Vigo",
   "hero-section.description":"PsEduca é un proxecto da Universidade de Vigo ten como obxetivo principal a divulgación da psicoloxía educativa. Nesta web encontrarás recursos, probas e programas, formación, divulgación e investigación no ámbito da psicoloxía educativa.",
   "navigation.signin": "Iniciar sesión",
+  "navigation.home": "Inicio",
   "navigation.resources": "Recursos",
   "navigation.tests-and-programs": "Probas e programas",
   "navigation.academic-programs": "Formación",
@@ -39,5 +40,9 @@
   "footer.links.emergencies": "Emerxencias",
   "footer.legal.terms": "Aviso legal",
   "footer.legal.data-protection": "Protección de datos",
-  "footer.legal.accessibility": "Accesibilidade"
+  "footer.legal.accessibility": "Accesibilidade",
+
+  "research.publications": "Publicacións",
+  "research.projects": "Proxectos",
+  "research.thesis": "Teses"
 }

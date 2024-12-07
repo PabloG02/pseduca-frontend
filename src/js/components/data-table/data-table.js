@@ -173,7 +173,7 @@ class DataTable extends HTMLElement {
                 if (col.showIn !== undefined && !col.showIn.includes('table')) return;
 
                 const td = document.createElement('td');
-                td.textContent = this.#formatCell(row[col.name], col.type);
+                td.appendChild(this.#formatCell(row[col.name], col.type));
                 tr.appendChild(td);
             });
 
@@ -197,16 +197,27 @@ class DataTable extends HTMLElement {
 
     /** Format the cell value based on the column type */
     #formatCell(value, type) {
-        if (value == null) return '';
+        if (value == null)
+            return document.createTextNode('');
 
         const formatters = {
-            text: (v) => v,
-            number: (v) => v.toLocaleString(),
-            date: (v) => new Date(v).toLocaleDateString(),
-            boolean: (v) => v ? 'Yes' : 'No'
+            text: (v) => document.createTextNode(v),
+            number: (v) => document.createTextNode(v.toLocaleString()),
+            date: (v) => document.createTextNode(new Date(v).toLocaleDateString()),
+            boolean: (v) => document.createTextNode(v ? 'Yes' : 'No'),
+            multiselect: (v) => {
+                const fragment = document.createDocumentFragment();
+                v.forEach(item => {
+                    const span = document.createElement('span');
+                    span.textContent = item;
+                    span.className = 'multiselect-item';
+                    fragment.appendChild(span);
+                });
+                return fragment;
+            },
         };
 
-        return formatters[type]?.(value) ?? value;
+        return formatters[type]?.(value) ?? document.createTextNode(value);
     }
 
     /** Render the complete table */
@@ -241,7 +252,7 @@ class DataTable extends HTMLElement {
             ${tableBody}
           </table>
           ${pagination}
-          <custom-dialog></custom-dialog>
+          <custom-dialog data-controller="${this.getAttribute('data-controller')}"></custom-dialog>
         `;
 
         this.addEventListeners();
