@@ -1,5 +1,5 @@
 import assert from "assert";
-import UserValidator from "../js/validators/user-validator.js";
+import UserValidator from "../src/js/validators/user-validator.js";
 
 function runTests() {
   let validator;
