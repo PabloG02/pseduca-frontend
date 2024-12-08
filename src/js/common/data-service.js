@@ -1,8 +1,9 @@
+import EnvironmentConfig from "./environment-config.js";
 import AuthService from "./auth-service.js";
 
 export default class DataService {
     constructor(controller) {
-        this.baseUrl = 'http://localhost:80/';
+        this.baseUrl = EnvironmentConfig.backendUrl;
         this.controller = controller;
         this.authService = new AuthService();
     }
