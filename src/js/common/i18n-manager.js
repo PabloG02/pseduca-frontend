@@ -85,6 +85,8 @@ export default class I18nManager {
                 element.textContent = translation;
             }
         }
+
+        element.classList.add('loaded');
     }
 
     /**
