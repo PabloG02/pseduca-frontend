@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
 
     <script src="src/js/common/i18n-manager.js" type="module" defer></script>
+    <script src="src/js/common/db-text-provider.js" type="module" defer></script>
 
     <script src="src/js/components/svg-icon.js" defer></script>
 </head>
@@ -46,12 +47,12 @@
     </div>
     <nav class="nav-menu" role="navigation" aria-label="Main navigation">
         <ul>
-            <li><a href="#" data-i18n="navigation.resources">Recursos</a></li>
-            <li><a href="#" data-i18n="navigation.tests-and-programs">Pruebas y programas</a></li>
-            <li><a href="#" data-i18n="navigation.academic-programs">Formación</a></li>
-            <li><a href="#" data-i18n="navigation.divulgation">Divulgación</a></li>
-            <li><a href="research.html" data-i18n="navigation.research">Investigación</a></li>
-            <li><a href="#" data-i18n="navigation.contact">Contacto</a></li>
+            <li><a href="#" data-i18n="navigation.resources">Resources</a></li>
+            <li><a href="#" data-i18n="navigation.tests-and-programs">Tests and programs</a></li>
+            <li><a href="#" data-i18n="navigation.academic-programs">Academic programs</a></li>
+            <li><a href="#" data-i18n="navigation.divulgation">Divulgation</a></li>
+            <li><a href="research.html" data-i18n="navigation.research">Research</a></li>
+            <li><a href="#" data-i18n="navigation.contact">Contact</a></li>
         </ul>
     </nav>
 </div>
@@ -64,7 +65,7 @@
     <section class="uvigo-bg">
         <div class="container about">
             <h2>PsEduca</h2>
-            <p>PsEduca es un proyecto de la Universidad de Vigo que tiene como objetivo principal la divulgación de la psicología educativa. En esta web encontrarás recursos, pruebas y programas, formación, divulgación e investigación en el ámbito de la psicología educativa.</p>
+            <p data-db-text="landing.project.description">PsEduca is a project of the University of Vigo that aims to disseminate educational psychology. On this website, you will find resources, tests and programs, training, dissemination, and research in the field of educational psychology.</p>
         </div>
     </section>
 
@@ -82,6 +83,10 @@
                 </svg>
             </a>
         </div>
+
+        <!--    <section class="container">-->
+        <!--        <range-slider min="0" max="100"></range-slider>-->
+        <!--    </section>-->
 
         <div class="feature-card">
             <svg-icon src="assets/fluent-ui-icons/news-28-filled.svg" class="articles-icon"></svg-icon>
@@ -142,7 +147,7 @@
                 <div class="expand-button">
                     <input type="checkbox" id="expand-footer-toggle" aria-controls="expandable-footer-content">
                     <label for="expand-footer-toggle" aria-label="Expandir contenido del pie de página">
-                        <span class="button-text" data-i18n="footer.expand-content">Ver más</span>
+                        <span class="button-text" data-i18n="footer.expand-content">See more</span>
                     </label>
                 </div>
             </div>
@@ -150,7 +155,7 @@
             <div class="expandable-content">
                 <div class="contact-information">
                     <div class="contact-info">
-                        <p data-i18n="footer.contact.title">INFORMACIÓN</p>
+                        <p data-i18n="footer.contact.title">INFORMATION</p>
                         <p>+34 986 812 000</p>
                         <a href="mailto:informacion@uvigo.gal">informacion@uvigo.gal</a>
                     </div>
@@ -172,12 +177,12 @@
                 </div>
 
                 <div class="additional-links">
-                    <a href="https://www.uvigo.gal/contacto" data-i18n="footer.links.contact">Contacto</a>
-                    <a href="https://secretaria.uvigo.gal/uv/web/qsp/" data-i18n="footer.links.suggestions">Caixa de queixas, suxestións e parabéns</a>
-                    <a href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo" data-i18n="footer.links.other-webs">Outras webs institucionais</a>
+                    <a href="https://www.uvigo.gal/contacto" data-i18n="footer.links.contact">Contact</a>
+                    <a href="https://secretaria.uvigo.gal/uv/web/qsp/" data-i18n="footer.links.suggestions">Complaints, suggestions, and congratulations box</a>
+                    <a href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo" data-i18n="footer.links.other-webs">Other institutional websites</a>
                     <a href="http://campusdomar.es" id="campus-do-mar" data-i18n="footer.links.campus-do-mar">CAMPUS DO MAR</a>
-                    <a href="https://transparencia.uvigo.es" data-i18n="footer.links.transparency">Transparencia</a>
-                    <a href="https://www.uvigo.gal/campus/emerxencias" data-i18n="footer.links.emergencies">Emerxencias</a>
+                    <a href="https://transparencia.uvigo.es" data-i18n="footer.links.transparency">Transparency</a>
+                    <a href="https://www.uvigo.gal/campus/emerxencias" data-i18n="footer.links.emergencies">Emergencies</a>
                 </div>
 
                 <div class="social-media">
@@ -203,9 +208,9 @@
 
                 <nav class="bottom-links">
                     <ul>
-                        <li><a href="https://www.uvigo.gal/aviso-legal" data-i18n="footer.legal.terms">Aviso legal</a></li>
-                        <li><a href="https://www.uvigo.gal/proteccion-datos" data-i18n="footer.legal.data-protection">Protección de datos</a></li>
-                        <li><a href="https://www.uvigo.gal/accesibilidade" data-i18n="footer.legal.accessibility">Accesibilidade</a></li>
+                        <li><a href="https://www.uvigo.gal/aviso-legal" data-i18n="footer.legal.terms">Legal terms</a></li>
+                        <li><a href="https://www.uvigo.gal/proteccion-datos" data-i18n="footer.legal.data-protection">Data protection</a></li>
+                        <li><a href="https://www.uvigo.gal/accesibilidade" data-i18n="footer.legal.accessibility">Accessibility</a></li>
                     </ul>
                 </nav>
             </div>

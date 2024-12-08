@@ -40,6 +40,26 @@ export default class DataService {
         }
     }
 
+    async get(id) {
+        const url = this.buildUrl('get');
+        const formData = new FormData();
+        formData.append(Object.keys(id)[0], Object.values(id)[0]);
+
+        const headers = new Headers();
+        if (this.authService.isAuthenticated()) {
+            headers.set('Authorization', `Bearer ${this.authService.getAuthToken()}`);
+        }
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: formData
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return this.#transformResponseKeysCamelToSnake(await response.json());
+    }
+
     async create(data) {
         return this.#createOrUpdate('create', data);
     }
