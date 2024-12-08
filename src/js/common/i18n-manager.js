@@ -101,7 +101,7 @@ export default class I18nManager {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const i18nManager = new I18nManager('assets/translations');
+    const i18nManager = new I18nManager('/assets/translations');
     switch (window.navigator.language.split('-')[0]) {
         case 'es':
         case 'gl':

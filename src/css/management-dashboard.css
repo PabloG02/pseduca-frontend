@@ -1,0 +1,53 @@
+/* Relevant links */
+.feature-grid {
+    --transition-speed: 0.3s;
+    --border-color: #EEE;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-block: 32px;
+
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.feature-card {
+    background-color: white;
+    border-radius: 4px;
+    border: 2px solid var(--border-color);
+    padding: 24px;
+    transition: all var(--transition-speed) ease;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.feature-card:is(:hover, :focus-within) {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+    background-color: var(--bg-blue-uvigo-700);
+    border-color: var(--bg-blue-uvigo-700);
+
+    & * {
+        color: white;
+    }
+}
+
+.feature-card svg {
+    min-width: 48px;
+    height: 48px;
+    transition: color calc(var(--transition-speed) / 2);
+}
+
+.feature-card h5 {
+    font-size: var(--text-xl-font-size);
+    line-height: var(--text-xl-line-height);
+    font-weight: 600;
+    transition: color calc(var(--transition-speed) / 2);
+}
