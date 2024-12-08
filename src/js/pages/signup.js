@@ -1,40 +1,79 @@
 import DataService from "../common/data-service.js";
+import UserValidator from "../validators/user-validator.js";
 
 class RegisterPage {
     #dataService;
+    #userValidator;
     #elements;
 
     constructor() {
         this.#dataService = new DataService('user');
+        this.#userValidator = new UserValidator();
         this.#cacheDOM();
-        this.#elements.form.addEventListener('submit', this.#register.bind(this));
+        this.#initialize();
     }
 
     #cacheDOM() {
         this.#elements = {
             form: document.querySelector('form'),
-            nameInput: document.getElementById('name'),
-            emailInput: document.getElementById('email'),
-            usernameInput: document.getElementById('username'),
-            passwordInput: document.getElementById('password'),
-            registerButton: document.querySelector('.register-button')
+            inputs: {
+                name: document.getElementById('name'),
+                email: document.getElementById('email'),
+                username: document.getElementById('username'),
+                password: document.getElementById('password'),
+            },
+            registerButton: document.querySelector('.register-button'),
         };
+    }
+
+    #initialize() {
+        this.#setUpValidation();
+        this.#elements.form.addEventListener('submit', (event) => this.#register(event));
+    }
+
+    #setUpValidation() {
+        Object.entries(this.#elements.inputs).forEach(([field, input]) => {
+            input.oninput = () => this.#validateField(field, input);
+        });
+    }
+
+    #validateField(field, input) {
+        const parentElement = input.parentElement;
+        const errorContainer = parentElement.querySelector('.message') || this.#createErrorContainer(parentElement);
+        const errors = this.#userValidator.validateField(field, input.value);
+
+        // Clear previous errors
+        errorContainer.innerHTML = '';
+        parentElement.classList.remove('error');
+
+        if (errors.length > 0) {
+            errors.forEach(error => errorContainer.innerHTML += `${error.message}<br>`);
+            parentElement.classList.add('error');
+        }
+    }
+
+    #createErrorContainer(parent) {
+        const errorElement = document.createElement('p');
+        errorElement.className = 'message';
+        parent.appendChild(errorElement);
+        return errorElement;
     }
 
     async #register(event) {
         event.preventDefault();
-        const name = this.#elements.nameInput.value;
-        const email = this.#elements.emailInput.value;
-        const username = this.#elements.usernameInput.value;
-        const password = this.#elements.passwordInput.value;
+        const user = Object.fromEntries(
+            Object.entries(this.#elements.inputs).map(([key, input]) => [key, input.value])
+        );
+
+        const errors = this.#userValidator.validateAll(user);
+
+        if (Object.values(errors).flat().length > 0) {
+            alert('Please correct the following errors:\n' + JSON.stringify(errors, null, 2));
+            return;
+        }
 
         try {
-            const response = await this.#dataService.create({
-                name: name,
-                email: email,
-                username: username,
-                password: password
-            });
+            const response = await this.#dataService.create(user);
 
             // Handle successful registration
             if (response) {
