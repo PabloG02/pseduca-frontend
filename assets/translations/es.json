@@ -31,5 +31,8 @@
 
   "research.publications": "Publicaciones",
   "research.projects": "Proyectos",
-  "research.thesis": "Tesis"
+  "research.thesis": "Tesis",
+
+  "landing.description": "PsEduca es un proyecto de la Universidad de Vigo que tiene como objetivo principal la divulgación de la psicología educativa. En esta web encontrarás recursos, pruebas y programas, formación, divulgación e investigación en el ámbito de la psicología educativa."
+  
 }
