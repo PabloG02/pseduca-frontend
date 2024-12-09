@@ -102,10 +102,11 @@ export default class I18nManager {
 
 document.addEventListener('DOMContentLoaded', async () => {
     const i18nManager = new I18nManager('/assets/translations');
-    switch (window.navigator.language.split('-')[0]) {
+    const browserLanguage = window.navigator.language.split('-')[0];
+    switch (browserLanguage) {
         case 'es':
         case 'gl':
-            await i18nManager.setLanguage(window.navigator.language);
+            await i18nManager.setLanguage(browserLanguage);
             break;
         default:
             await i18nManager.setLanguage('es');
