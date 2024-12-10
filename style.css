@@ -456,6 +456,12 @@ img, svg {
     margin-bottom: 30px;
 }
 
+.subsection-title {
+    font-size: var(--text-3xl-font-size);
+    line-height: var(--text-3xl-line-height);
+    font-weight: 100;
+    margin-block: 30px;
+}
 
 /* Footer */
 footer {

@@ -2,6 +2,7 @@
   "page.title": "PsEduca | Universidad de Vigo",
   "navigation.signin": "Iniciar sesión",
   "navigation.home": "Inicio",
+  "navigation.about-us": "Sobre nosotros",
   "navigation.resources": "Recursos",
   "navigation.tests-and-programs": "Pruebas y programas",
   "navigation.academic-programs": "Formación",
@@ -31,6 +32,9 @@
   "footer.legal.terms": "Aviso legal",
   "footer.legal.data-protection": "Protección de datos",
   "footer.legal.accessibility": "Accesibilidad",
+
+  "about-us.presentation": "Presentación",
+  "about-us.members": "Miembros",
 
   "research.publications": "Publicaciones",
   "research.projects": "Proyectos",
