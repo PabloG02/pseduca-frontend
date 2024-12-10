@@ -1,8 +1,10 @@
+import EnvironmentConfig from "./environment-config.js";
+
 export default class AuthService {
     #baseUrl;
 
     constructor() {
-        this.#baseUrl = 'http://localhost:80/';
+        this.#baseUrl = EnvironmentConfig.backendUrl;
     }
 
     #buildUrl(action) {

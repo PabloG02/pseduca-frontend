@@ -5,6 +5,7 @@ class DataTable extends HTMLElement {
     // Private fields
     #dataService;
     #data = [];
+    #multiselectOptions = {};
 
     #currentPage = 1;
     #rowsPerPage = 10;
@@ -31,6 +32,7 @@ class DataTable extends HTMLElement {
     /** Fetch data from the server and render the complete table */
     async #firstTimeLoadData() {
         this.#data = await this.#fetchData();
+        this.#multiselectOptions = await this.#fetchMultiselectOptions();
         this.renderAll();
     }
 
@@ -58,6 +60,19 @@ class DataTable extends HTMLElement {
         this.#totalPages = total_count / this.#rowsPerPage;
 
         return data;
+    }
+
+    async #fetchMultiselectOptions() {
+        const columns = this.parseJSON('columns');
+        const multiselectColumns = columns.filter(col => col.type === 'multiselect');
+
+        const options = {};
+        for (const col of multiselectColumns) {
+            const response = await new DataService(col.controller).fetchData(col.name);
+            options[col.name] = response.data.map(row => row["name"]);
+        }
+
+        return options;
     }
 
     parseJSON(attr) {
@@ -141,6 +156,26 @@ class DataTable extends HTMLElement {
                     div.style.display = 'grid';
                     div.append(inputFrom, inputTo);
                     thFilter.appendChild(div);
+                } else if (col.type === 'multiselect') {
+                    // Create a multiselect filter
+                    const select = document.createElement('select');
+                    select.className = 'filter-input';
+                    select.dataset.column = col.name;
+
+                    // Add "No filter" option
+                    const noFilterOption = document.createElement('option');
+                    noFilterOption.value = '';
+                    noFilterOption.textContent = `No filter`;
+                    select.appendChild(noFilterOption);
+
+                    this.#multiselectOptions[col.name]?.forEach(option => {
+                        const opt = document.createElement('option');
+                        opt.value = option;
+                        opt.textContent = option;
+                        select.appendChild(opt);
+                    });
+
+                    thFilter.appendChild(select);
                 } else {
                     // Create a text input filter
                     const input = createFilterInput('text', `Filter ${label}`, col.name);

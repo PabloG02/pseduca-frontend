@@ -27,7 +27,7 @@ class LoginPage {
         const result = await this.#authService.login(username, password);
 
         if (result.success) {
-            window.location.href = 'index.html';
+            window.location.href = 'private/management-dashboard.html';
         } else {
             alert(`Login failed: ${result.error}`);
         }

@@ -1,8 +1,9 @@
+import EnvironmentConfig from "./environment-config.js";
 import AuthService from "./auth-service.js";
 
 export default class DataService {
     constructor(controller) {
-        this.baseUrl = 'http://localhost:80/';
+        this.baseUrl = EnvironmentConfig.backendUrl;
         this.controller = controller;
         this.authService = new AuthService();
     }
@@ -38,6 +39,26 @@ export default class DataService {
             console.error('Data fetch failed:', error);
             return { data: [], total_count: 0 };
         }
+    }
+
+    async get(id) {
+        const url = this.buildUrl('get');
+        const formData = new FormData();
+        formData.append(Object.keys(id)[0], Object.values(id)[0]);
+
+        const headers = new Headers();
+        if (this.authService.isAuthenticated()) {
+            headers.set('Authorization', `Bearer ${this.authService.getAuthToken()}`);
+        }
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: formData
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return this.#transformResponseKeysCamelToSnake(await response.json());
     }
 
     async create(data) {
