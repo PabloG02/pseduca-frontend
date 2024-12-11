@@ -4,7 +4,7 @@ class AboutUsPage {
     #dataService;
 
     constructor() {
-        this.#dataService = new DataService("teammember");
+        this.#dataService = new DataService("team-member");
     }
 
     async #fetchTeamMembers() {
