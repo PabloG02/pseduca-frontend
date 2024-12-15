@@ -1,4 +1,5 @@
 import DataService from "../common/data-service.js";
+import EnvironmentConfig from "../common/environment-config.js";
 
 class AboutUsPage {
     #dataService;
@@ -19,7 +20,7 @@ class AboutUsPage {
         teamMembers.forEach(member => {
             const teamMember = document.createElement('team-member');
             teamMember.setAttribute('name', member.name);
-            teamMember.setAttribute('image-url', member.image_uri);
+            teamMember.setAttribute('image-url', EnvironmentConfig.backendUrl + member.image_uri);
             teamMember.setAttribute('biography', member.biography);
             teamMember.setAttribute('email', member.email);
             teamMember.setAttribute('researcher-id', member.researcher_id);

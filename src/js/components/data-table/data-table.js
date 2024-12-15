@@ -1,4 +1,5 @@
 import DataService from "../../common/data-service.js";
+import EnvironmentConfig from "../../common/environment-config.js";
 import CustomDialog from "../custom-dialog/custom-dialog.js";
 
 class DataTable extends HTMLElement {
@@ -214,15 +215,22 @@ class DataTable extends HTMLElement {
 
             // Add buttons
             const buttonTd = document.createElement('td');
+            const buttonsDiv = document.createElement('div');
+            buttonsDiv.className = 'action-buttons';
             this.#getAllowedActions().forEach((action) => {
                 if (action === 'create') return;
 
                 const button = document.createElement('button');
-                button.textContent = action.replace(/^\w/, c => c.toUpperCase());
+                const icon = document.createElement('svg-icon');
+                icon.setAttribute('src', `/assets/fluent-ui-icons/${action}-16-filled.svg`);
+                button.appendChild(icon);
+                const textNode = document.createTextNode(action.replace(/^\w/, c => c.toUpperCase()));
+                button.appendChild(textNode);
                 button.className = `button ${action.toLowerCase()}-button`;
-                buttonTd.appendChild(button);
+                buttonsDiv.appendChild(button);
             });
 
+            buttonTd.appendChild(buttonsDiv);
             tr.appendChild(buttonTd);
             tbody.appendChild(tr);
         });
@@ -250,6 +258,12 @@ class DataTable extends HTMLElement {
                 });
                 return fragment;
             },
+            image: (v) => {
+                const img = document.createElement('img');
+                img.src = EnvironmentConfig.backendUrl + v;
+                img.className = 'table-image';
+                return img;
+            }
         };
 
         return formatters[type]?.(value) ?? document.createTextNode(value);
@@ -370,12 +384,35 @@ class DataTable extends HTMLElement {
                         cols="${column.cols || 50}"
                     >${this.#escapeHtml(value)}</textarea>
                 `;
+            case 'multiselect':
+                const options = this.#multiselectOptions[column.name];
+                return `
+                    <select
+                        ${baseAttrs}
+                        multiple
+                    >
+                        ${options.map(option => `
+                            <option
+                                value="${option}"
+                                ${value.includes(option) ? 'selected' : ''}
+                            >${option}</option>
+                        `).join('')}
+                    </select>
+                `;
+            case 'image':
+                return `
+                    <input
+                        type="file"
+                        ${baseAttrs}
+                        accept="image/png, image/jpeg"
+                    />
+                `;
             case 'number':
                 return `
                     <input 
                         type="number"
                         ${baseAttrs}
-                        value="${this.#escapeHtml(value)}"
+                        value="${Number(value)}"
                     />
                 `;
             case 'email':
@@ -430,6 +467,8 @@ class DataTable extends HTMLElement {
         this.querySelectorAll('.form-input').forEach(input => {
             if (input.type === 'date') {
                 newData[input.dataset.column] = new Date(input.value).toISOString();
+            } else if (input.type === 'file') {
+                newData[input.dataset.column] = input.files[0];
             } else {
                 newData[input.dataset.column] = input.value;
             }

@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
 
+  <script src="../src/js/common/i18n-manager.js" type="module" defer></script>
+
   <link rel="stylesheet" href="../src/js/components/data-table/data-table.css">
   <link rel="stylesheet" href="../src/js/components/custom-dialog/custom-dialog.css">
 
@@ -24,9 +26,9 @@
       <svg-icon src="/assets/logo-uvigo.svg"></svg-icon>
     </a>
     <div class="top-links">
-      <a href="../signin.html" class="sign-in" aria-label="Iniciar sesión">
+      <a href="signin.html" class="sign-in" aria-label="Iniciar sesión">
         <svg-icon src="/assets/fluent-ui-icons/person-20-filled.svg" aria-hidden="true"></svg-icon>
-        <span>Iniciar sesión</span>
+        <span data-i18n="navigation.signin">Iniciar sesión</span>
       </a>
       <ul class="language-list">
         <li><a href="#" lang="gl" aria-label="Galego">GL</a></li>
@@ -48,12 +50,12 @@
   </div>
   <nav class="nav-menu" role="navigation" aria-label="Main navigation">
     <ul>
-      <li><a href="#">Recursos</a></li>
-      <li><a href="#">Pruebas y programas</a></li>
-      <li><a href="#">Formación</a></li>
-      <li><a href="#">Divulgación</a></li>
-      <li><a href="#">Investigación</a></li>
-      <li><a href="#">Contacto</a></li>
+      <li><a href="#" data-i18n="navigation.resources">Resources</a></li>
+      <li><a href="#" data-i18n="navigation.tests-and-programs">Tests and programs</a></li>
+      <li><a href="#" data-i18n="navigation.academic-programs">Academic programs</a></li>
+      <li><a href="#" data-i18n="navigation.divulgation">Divulgation</a></li>
+      <li><a href="../research.html" data-i18n="navigation.research">Research</a></li>
+      <li><a href="#" data-i18n="navigation.contact">Contact</a></li>
     </ul>
   </nav>
 </div>
@@ -62,16 +64,14 @@
 
 <main>
   <data-table
-          data-controller="user"
+          data-controller="team-member"
           columns='[
-            {"name": "username", "id": true, "type": "text", "label": "Username", "filterable": true},
-            {"name": "password", "type": "password", "label": "Password", "filterable": false, "showIn": ["create"]},
-            {"name": "email", "type": "email", "label": "Email", "filterable": true},
+            {"name": "id", "id": true, "type": "number", "label": "ID", "filterable": true, "showIn": ["table", "view", "edit"]},
             {"name": "name", "type": "text", "label": "Name", "filterable": true},
-            {"name": "activated", "type": "boolean", "label": "Activated", "filterable": true},
-            {"name": "roles", "type": "multiselect", "controller": "role", "label": "Role", "filterable": true},
-            {"name": "created_at", "type": "date", "label": "Created At", "filterable": true, "showIn": ["table", "view"]},
-            {"name": "last_login", "type": "date", "label": "Last Login", "filterable": true, "showIn": ["table", "view"]}
+            {"name": "email", "type": "email", "label": "Email", "filterable": true},
+            {"name": "image_uri", "type": "image", "label": "Image URI", "filterable": false},
+            {"name": "biography", "type": "textarea", "label": "Biography", "filterable": false},
+            {"name": "researcher_id", "type": "number", "label": "Researcher ID", "filterable": true}
           ]'>
   </data-table>
 </main>
@@ -91,7 +91,7 @@
         <div class="expand-button">
           <input type="checkbox" id="expand-footer-toggle" aria-controls="expandable-footer-content">
           <label for="expand-footer-toggle" aria-label="Expandir contenido del pie de página">
-            <span class="button-text">Ver más</span>
+            <span class="button-text" data-i18n="footer.expand-content">See more</span>
           </label>
         </div>
       </div>
@@ -99,7 +99,7 @@
       <div class="expandable-content">
         <div class="contact-information">
           <div class="contact-info">
-            <p>INFORMACIÓN</p>
+            <p data-i18n="footer.contact.title">INFORMATION</p>
             <p>+34 986 812 000</p>
             <a href="mailto:informacion@uvigo.gal">informacion@uvigo.gal</a>
           </div>
@@ -121,12 +121,12 @@
         </div>
 
         <div class="additional-links">
-          <a href="https://www.uvigo.gal/contacto">Contacto</a>
-          <a href="https://secretaria.uvigo.gal/uv/web/qsp/">Caixa de queixas, suxestións e parabéns</a>
-          <a href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo">Outras webs institucionais</a>
-          <a href="http://campusdomar.es" id="campus-do-mar">CAMPUS DO MAR</a>
-          <a href="https://transparencia.uvigo.es">Transparencia</a>
-          <a href="https://www.uvigo.gal/campus/emerxencias">Emerxencias</a>
+          <a href="https://www.uvigo.gal/contacto" data-i18n="footer.links.contact">Contact</a>
+          <a href="https://secretaria.uvigo.gal/uv/web/qsp/" data-i18n="footer.links.suggestions">Complaints, suggestions, and congratulations box</a>
+          <a href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo" data-i18n="footer.links.other-webs">Other institutional websites</a>
+          <a href="http://campusdomar.es" id="campus-do-mar" data-i18n="footer.links.campus-do-mar">CAMPUS DO MAR</a>
+          <a href="https://transparencia.uvigo.es" data-i18n="footer.links.transparency">Transparency</a>
+          <a href="https://www.uvigo.gal/campus/emerxencias" data-i18n="footer.links.emergencies">Emergencies</a>
         </div>
 
         <div class="social-media">
@@ -152,9 +152,9 @@
 
         <nav class="bottom-links">
           <ul>
-            <li><a href="https://www.uvigo.gal/aviso-legal">Aviso legal</a></li>
-            <li><a href="https://www.uvigo.gal/proteccion-datos">Protección de datos</a></li>
-            <li><a href="https://www.uvigo.gal/accesibilidade">Accesibilidade</a></li>
+            <li><a href="https://www.uvigo.gal/aviso-legal" data-i18n="footer.legal.terms">Legal terms</a></li>
+            <li><a href="https://www.uvigo.gal/proteccion-datos" data-i18n="footer.legal.data-protection">Data protection</a></li>
+            <li><a href="https://www.uvigo.gal/accesibilidade" data-i18n="footer.legal.accessibility">Accessibility</a></li>
           </ul>
         </nav>
       </div>
