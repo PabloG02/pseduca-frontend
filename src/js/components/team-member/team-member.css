@@ -1,0 +1,28 @@
+.team-member img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+    display: block;
+    justify-self: center;
+    margin-bottom: 1rem;
+}
+
+.team-member .name {
+    margin-bottom: 12px;
+    color: var(--bg-blue-uvigo-700);
+    font-size: var(--text-2xl-font-size);
+    line-height: var(--text-2xl-line-height);
+}
+
+.team-member .biography {
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}

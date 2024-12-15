@@ -55,25 +55,41 @@ data-table {
         font-weight: 500;
     }
 
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
     .view-button, .edit-button, .delete-button {
-        color: white;
-        border: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        background-color: white;
         padding: 8px 12px;
-        margin-right: 8px;
         border-radius: 4px;
         cursor: pointer;
     }
 
     .view-button {
-        background: #10b981;
+        color: black;
+        border: 1px solid #e5e7eb;
     }
 
     .edit-button {
-        background: #2563eb;
+        color: white;
+        background-color: var(--bg-blue-uvigo-700);
+        border: none;
     }
 
     .delete-button {
-        background: #ef4444;
+        color: var(--red-700);
+        border: 1px solid var(--red-700);
+
+        &:hover {
+            color: white;
+            background-color: var(--red-700);
+        }
     }
 
     .pagination {

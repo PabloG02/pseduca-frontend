@@ -2,7 +2,7 @@ import DataService from "./data-service.js";
 
 export default class DbTextProvider {
     constructor() {
-        this.dataService = new DataService('webpagetext');
+        this.dataService = new DataService('webpage-text');
     }
 
     async setDocumentDbTexts() {

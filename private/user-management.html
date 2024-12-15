@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PsEduca | Universidad de Vigo</title>
   <link href="../style.css" rel="stylesheet"/>
+  <link href="../src/css/management-table.css" rel="stylesheet"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +24,7 @@
       <svg-icon src="/assets/logo-uvigo.svg"></svg-icon>
     </a>
     <div class="top-links">
-      <a href="signin.html" class="sign-in" aria-label="Iniciar sesión">
+      <a href="../signin.html" class="sign-in" aria-label="Iniciar sesión">
         <svg-icon src="/assets/fluent-ui-icons/person-20-filled.svg" aria-hidden="true"></svg-icon>
         <span>Iniciar sesión</span>
       </a>
@@ -59,7 +60,7 @@
 
 <!-- Specific page content -->
 
-<main class="container">
+<main>
   <data-table
           data-controller="user"
           columns='[
@@ -68,7 +69,7 @@
             {"name": "email", "type": "email", "label": "Email", "filterable": true},
             {"name": "name", "type": "text", "label": "Name", "filterable": true},
             {"name": "activated", "type": "boolean", "label": "Activated", "filterable": true},
-            {"name": "roles", "type": "multiselect", "controller": "role", "label": "Role", "filterable": true, "showIn": ["table"]},
+            {"name": "roles", "type": "multiselect", "controller": "role", "label": "Role", "filterable": true},
             {"name": "created_at", "type": "date", "label": "Created At", "filterable": true, "showIn": ["table", "view"]},
             {"name": "last_login", "type": "date", "label": "Last Login", "filterable": true, "showIn": ["table", "view"]}
           ]'>

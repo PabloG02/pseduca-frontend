@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="page.title">PsEduca | Universidad de Vigo</title>
-
-    <link href="../style.css" rel="stylesheet"/>
-    <link href="../src/css/management-dashboard.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <link href="src/css/about-us.css" rel="stylesheet"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
 
-    <script src="../src/js/common/i18n-manager.js" type="module" defer></script>
-    <script src="../src/js/common/db-text-provider.js" type="module" defer></script>
+    <script src="src/js/common/i18n-manager.js" type="module" defer></script>
+    <script src="src/js/common/db-text-provider.js" type="module" defer></script>
+    <script src="src/js/pages/about-us.js" type="module" defer></script>
 
-    <script src="../src/js/components/svg-icon.js" defer></script>
+    <link rel="stylesheet" href="src/js/components/team-member/team-member.css">
+
+    <script src="src/js/components/svg-icon.js" defer></script>
+    <script src="src/js/components/team-member/team-member.js" defer></script>
 </head>
 <body>
 <header class="uvigo-bg">
@@ -24,7 +27,7 @@
             <svg-icon src="/assets/logo-uvigo.svg"></svg-icon>
         </a>
         <div class="top-links">
-            <a href="../signin.html" class="sign-in" aria-label="Iniciar sesión">
+            <a href="signin.html" class="sign-in" aria-label="Iniciar sesión">
                 <svg-icon src="/assets/fluent-ui-icons/person-20-filled.svg" aria-hidden="true"></svg-icon>
                 <span data-i18n="navigation.signin">Iniciar sesión</span>
             </a>
@@ -52,7 +55,7 @@
             <li><a href="#" data-i18n="navigation.tests-and-programs">Tests and programs</a></li>
             <li><a href="#" data-i18n="navigation.academic-programs">Academic programs</a></li>
             <li><a href="#" data-i18n="navigation.divulgation">Divulgation</a></li>
-            <li><a href="../research.html" data-i18n="navigation.research">Research</a></li>
+            <li><a href="research.html" data-i18n="navigation.research">Research</a></li>
             <li><a href="#" data-i18n="navigation.contact">Contact</a></li>
         </ul>
     </nav>
@@ -60,22 +63,29 @@
 
 <!-- Specific page content -->
 
+<nav aria-label="Breadcrumb" class="container breadcrumb-nav">
+    <ul>
+        <li><a href="index.html" data-i18n="navigation.home">Home</a></li>
+        <li><span data-i18n="navigation.about-us" aria-current="page">About us</span></li>
+    </ul>
+</nav>
+
 <main class="container">
-    <h1 class="main-section-title" data-i18n="navigation.private.dashboard">Dashboard</h1>
-    <section class="feature-grid">
-        <a class="feature-card" href="web-text-management.html">
-            <svg-icon src="/assets/fluent-ui-icons/text-edit-style-24-filled.svg"></svg-icon>
-            <h5 data-i18n="navigation.private.web-text-editor">Web text editor</h5>
-        </a>
-        <a class="feature-card" href="user-management.html">
-            <svg-icon src="/assets/fluent-ui-icons/person-20-filled.svg"></svg-icon>
-            <h5 data-i18n="navigation.private.users">Users</h5>
-        </a>
-        <a class="feature-card" href="team-member-management.html">
-            <svg-icon src="/assets/fluent-ui-icons/people-team-24-filled.svg"></svg-icon>
-            <h5 data-i18n="navigation.private.team-members">Team members</h5>
-        </a>
-    </section>
+    <h1 class="main-section-title" data-i18n="navigation.about-us">About us</h1>
+    <h2 class="subsection-title" data-i18n="about-us.presentation">Presentation</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc ultricies
+        ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies.
+        Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec
+        purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec
+        nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies
+        ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies.
+        Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec
+        purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec.
+    </p>
+    <h2 class="subsection-title" data-i18n="about-us.members">Members</h2>
+    <div class="team-grid">
+        <!-- Team member component -->
+    </div>
 </main>
 
 <!-- End of specific page content -->
