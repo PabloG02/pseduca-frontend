@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="page.title">PsEduca | Universidad de Vigo</title>
     <link href="style.css" rel="stylesheet"/>
-    <link href="landing.css" rel="stylesheet"/>
+    <link href="src/css/about-us.css" rel="stylesheet"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,12 @@
 
     <script src="src/js/common/i18n-manager.js" type="module" defer></script>
     <script src="src/js/common/db-text-provider.js" type="module" defer></script>
+    <script src="src/js/pages/about-us.js" type="module" defer></script>
+
+    <link rel="stylesheet" href="src/js/components/team-member/team-member.css">
 
     <script src="src/js/components/svg-icon.js" defer></script>
+    <script src="src/js/components/team-member/team-member.js" defer></script>
 </head>
 <body>
 <header class="uvigo-bg">
@@ -59,77 +63,29 @@
 
 <!-- Specific page content -->
 
-<section class="hero" aria-label="Hero section"></section>
+<nav aria-label="Breadcrumb" class="container breadcrumb-nav">
+    <ul>
+        <li><a href="index.html" data-i18n="navigation.home">Home</a></li>
+        <li><span data-i18n="navigation.about-us" aria-current="page">About us</span></li>
+    </ul>
+</nav>
 
-<main>
-    <section class="uvigo-bg">
-        <div class="container about">
-            <h2>PsEduca</h2>
-            <p data-db-text="landing.project.description">PsEduca is a project of the University of Vigo that aims to disseminate educational psychology. On this website, you will find resources, tests and programs, training, dissemination, and research in the field of educational psychology.</p>
-        </div>
-    </section>
-
-    <section class="container feature-grid">
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/library-28-filled.svg" class="resources-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.resources.title">Resources</h5>
-                <p data-i18n="features.resources.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-
-        <!--    <section class="container">-->
-        <!--        <range-slider min="0" max="100"></range-slider>-->
-        <!--    </section>-->
-
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/news-28-filled.svg" class="articles-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.articles.title">Articles</h5>
-                <p data-i18n="features.articles.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/hat-graduation-28-filled.svg" class="academic-programs-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.academic-programs.title">Academic programs</h5>
-                <p data-i18n="features.academic-programs.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/book-28-filled.svg" class="research-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.research.title">Research</h5>
-                <p data-i18n="features.research.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-    </section>
+<main class="container">
+    <h1 class="main-section-title" data-i18n="navigation.about-us">About us</h1>
+    <h2 class="subsection-title" data-i18n="about-us.presentation">Presentation</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc ultricies
+        ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies.
+        Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec
+        purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec
+        nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies
+        ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies.
+        Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec
+        purus nec nunc ultricies ultricies. Nullam nec purus nec nunc ultricies ultricies. Nullam nec purus nec.
+    </p>
+    <h2 class="subsection-title" data-i18n="about-us.members">Members</h2>
+    <div class="team-grid">
+        <!-- Team member component -->
+    </div>
 </main>
 
 <!-- End of specific page content -->

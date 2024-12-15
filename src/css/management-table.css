@@ -1,0 +1,9 @@
+main {
+    padding-inline: 20px;
+    margin-inline: auto;
+    max-inline-size: 1536px;
+}
+
+dialog {
+    min-width: min(100%, 600px);
+}

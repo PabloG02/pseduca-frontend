@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="page.title">PsEduca | Universidad de Vigo</title>
-    <link href="style.css" rel="stylesheet"/>
-    <link href="landing.css" rel="stylesheet"/>
+
+    <link href="../style.css" rel="stylesheet"/>
+    <link href="../src/css/management-dashboard.css" rel="stylesheet"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
 
-    <script src="src/js/common/i18n-manager.js" type="module" defer></script>
-    <script src="src/js/common/db-text-provider.js" type="module" defer></script>
+    <script src="../src/js/common/i18n-manager.js" type="module" defer></script>
+    <script src="../src/js/common/db-text-provider.js" type="module" defer></script>
 
-    <script src="src/js/components/svg-icon.js" defer></script>
+    <script src="../src/js/components/svg-icon.js" defer></script>
 </head>
 <body>
 <header class="uvigo-bg">
@@ -23,7 +24,7 @@
             <svg-icon src="/assets/logo-uvigo.svg"></svg-icon>
         </a>
         <div class="top-links">
-            <a href="signin.html" class="sign-in" aria-label="Iniciar sesión">
+            <a href="../signin.html" class="sign-in" aria-label="Iniciar sesión">
                 <svg-icon src="/assets/fluent-ui-icons/person-20-filled.svg" aria-hidden="true"></svg-icon>
                 <span data-i18n="navigation.signin">Iniciar sesión</span>
             </a>
@@ -51,7 +52,7 @@
             <li><a href="#" data-i18n="navigation.tests-and-programs">Tests and programs</a></li>
             <li><a href="#" data-i18n="navigation.academic-programs">Academic programs</a></li>
             <li><a href="#" data-i18n="navigation.divulgation">Divulgation</a></li>
-            <li><a href="research.html" data-i18n="navigation.research">Research</a></li>
+            <li><a href="../research.html" data-i18n="navigation.research">Research</a></li>
             <li><a href="#" data-i18n="navigation.contact">Contact</a></li>
         </ul>
     </nav>
@@ -59,76 +60,21 @@
 
 <!-- Specific page content -->
 
-<section class="hero" aria-label="Hero section"></section>
-
-<main>
-    <section class="uvigo-bg">
-        <div class="container about">
-            <h2>PsEduca</h2>
-            <p data-db-text="landing.project.description">PsEduca is a project of the University of Vigo that aims to disseminate educational psychology. On this website, you will find resources, tests and programs, training, dissemination, and research in the field of educational psychology.</p>
-        </div>
-    </section>
-
-    <section class="container feature-grid">
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/library-28-filled.svg" class="resources-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.resources.title">Resources</h5>
-                <p data-i18n="features.resources.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-
-        <!--    <section class="container">-->
-        <!--        <range-slider min="0" max="100"></range-slider>-->
-        <!--    </section>-->
-
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/news-28-filled.svg" class="articles-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.articles.title">Articles</h5>
-                <p data-i18n="features.articles.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/hat-graduation-28-filled.svg" class="academic-programs-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.academic-programs.title">Academic programs</h5>
-                <p data-i18n="features.academic-programs.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/book-28-filled.svg" class="research-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.research.title">Research</h5>
-                <p data-i18n="features.research.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
+<main class="container">
+    <h1 class="main-section-title" data-i18n="navigation.private.dashboard">Dashboard</h1>
+    <section class="feature-grid">
+        <a class="feature-card" href="web-text-management.html">
+            <svg-icon src="/assets/fluent-ui-icons/text-edit-style-24-filled.svg"></svg-icon>
+            <h5 data-i18n="navigation.private.web-text-editor">Web text editor</h5>
+        </a>
+        <a class="feature-card" href="user-management.html">
+            <svg-icon src="/assets/fluent-ui-icons/person-20-filled.svg"></svg-icon>
+            <h5 data-i18n="navigation.private.users">Users</h5>
+        </a>
+        <a class="feature-card" href="team-member-management.html">
+            <svg-icon src="/assets/fluent-ui-icons/people-team-24-filled.svg"></svg-icon>
+            <h5 data-i18n="navigation.private.team-members">Team members</h5>
+        </a>
     </section>
 </main>
 

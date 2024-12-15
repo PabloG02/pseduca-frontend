@@ -1,10 +1,12 @@
-import DataService from "../data-service.js";
+import DataService from "../../common/data-service.js";
+import EnvironmentConfig from "../../common/environment-config.js";
 import CustomDialog from "../custom-dialog/custom-dialog.js";
 
 class DataTable extends HTMLElement {
     // Private fields
     #dataService;
     #data = [];
+    #multiselectOptions = {};
 
     #currentPage = 1;
     #rowsPerPage = 10;
@@ -31,6 +33,7 @@ class DataTable extends HTMLElement {
     /** Fetch data from the server and render the complete table */
     async #firstTimeLoadData() {
         this.#data = await this.#fetchData();
+        this.#multiselectOptions = await this.#fetchMultiselectOptions();
         this.renderAll();
     }
 
@@ -58,6 +61,19 @@ class DataTable extends HTMLElement {
         this.#totalPages = total_count / this.#rowsPerPage;
 
         return data;
+    }
+
+    async #fetchMultiselectOptions() {
+        const columns = this.parseJSON('columns');
+        const multiselectColumns = columns.filter(col => col.type === 'multiselect');
+
+        const options = {};
+        for (const col of multiselectColumns) {
+            const response = await new DataService(col.controller).fetchData(col.name);
+            options[col.name] = response.data.map(row => row["name"]);
+        }
+
+        return options;
     }
 
     parseJSON(attr) {
@@ -141,6 +157,26 @@ class DataTable extends HTMLElement {
                     div.style.display = 'grid';
                     div.append(inputFrom, inputTo);
                     thFilter.appendChild(div);
+                } else if (col.type === 'multiselect') {
+                    // Create a multiselect filter
+                    const select = document.createElement('select');
+                    select.className = 'filter-input';
+                    select.dataset.column = col.name;
+
+                    // Add "No filter" option
+                    const noFilterOption = document.createElement('option');
+                    noFilterOption.value = '';
+                    noFilterOption.textContent = `No filter`;
+                    select.appendChild(noFilterOption);
+
+                    this.#multiselectOptions[col.name]?.forEach(option => {
+                        const opt = document.createElement('option');
+                        opt.value = option;
+                        opt.textContent = option;
+                        select.appendChild(opt);
+                    });
+
+                    thFilter.appendChild(select);
                 } else {
                     // Create a text input filter
                     const input = createFilterInput('text', `Filter ${label}`, col.name);
@@ -173,21 +209,28 @@ class DataTable extends HTMLElement {
                 if (col.showIn !== undefined && !col.showIn.includes('table')) return;
 
                 const td = document.createElement('td');
-                td.textContent = this.#formatCell(row[col.name], col.type);
+                td.appendChild(this.#formatCell(row[col.name], col.type));
                 tr.appendChild(td);
             });
 
             // Add buttons
             const buttonTd = document.createElement('td');
+            const buttonsDiv = document.createElement('div');
+            buttonsDiv.className = 'action-buttons';
             this.#getAllowedActions().forEach((action) => {
                 if (action === 'create') return;
 
                 const button = document.createElement('button');
-                button.textContent = action.replace(/^\w/, c => c.toUpperCase());
+                const icon = document.createElement('svg-icon');
+                icon.setAttribute('src', `/assets/fluent-ui-icons/${action}-16-filled.svg`);
+                button.appendChild(icon);
+                const textNode = document.createTextNode(action.replace(/^\w/, c => c.toUpperCase()));
+                button.appendChild(textNode);
                 button.className = `button ${action.toLowerCase()}-button`;
-                buttonTd.appendChild(button);
+                buttonsDiv.appendChild(button);
             });
 
+            buttonTd.appendChild(buttonsDiv);
             tr.appendChild(buttonTd);
             tbody.appendChild(tr);
         });
@@ -197,16 +240,33 @@ class DataTable extends HTMLElement {
 
     /** Format the cell value based on the column type */
     #formatCell(value, type) {
-        if (value == null) return '';
+        if (value == null)
+            return document.createTextNode('');
 
         const formatters = {
-            text: (v) => v,
-            number: (v) => v.toLocaleString(),
-            date: (v) => new Date(v).toLocaleDateString(),
-            boolean: (v) => v ? 'Yes' : 'No'
+            text: (v) => document.createTextNode(v),
+            number: (v) => document.createTextNode(v.toLocaleString()),
+            date: (v) => document.createTextNode(new Date(v).toLocaleDateString()),
+            boolean: (v) => document.createTextNode(v ? 'Yes' : 'No'),
+            multiselect: (v) => {
+                const fragment = document.createDocumentFragment();
+                v.forEach(item => {
+                    const span = document.createElement('span');
+                    span.textContent = item;
+                    span.className = 'multiselect-item';
+                    fragment.appendChild(span);
+                });
+                return fragment;
+            },
+            image: (v) => {
+                const img = document.createElement('img');
+                img.src = EnvironmentConfig.backendUrl + v;
+                img.className = 'table-image';
+                return img;
+            }
         };
 
-        return formatters[type]?.(value) ?? value;
+        return formatters[type]?.(value) ?? document.createTextNode(value);
     }
 
     /** Render the complete table */
@@ -241,7 +301,7 @@ class DataTable extends HTMLElement {
             ${tableBody}
           </table>
           ${pagination}
-          <custom-dialog></custom-dialog>
+          <custom-dialog data-controller="${this.getAttribute('data-controller')}"></custom-dialog>
         `;
 
         this.addEventListeners();
@@ -324,12 +384,35 @@ class DataTable extends HTMLElement {
                         cols="${column.cols || 50}"
                     >${this.#escapeHtml(value)}</textarea>
                 `;
+            case 'multiselect':
+                const options = this.#multiselectOptions[column.name];
+                return `
+                    <select
+                        ${baseAttrs}
+                        multiple
+                    >
+                        ${options.map(option => `
+                            <option
+                                value="${option}"
+                                ${value.includes(option) ? 'selected' : ''}
+                            >${option}</option>
+                        `).join('')}
+                    </select>
+                `;
+            case 'image':
+                return `
+                    <input
+                        type="file"
+                        ${baseAttrs}
+                        accept="image/png, image/jpeg"
+                    />
+                `;
             case 'number':
                 return `
                     <input 
                         type="number"
                         ${baseAttrs}
-                        value="${this.#escapeHtml(value)}"
+                        value="${Number(value)}"
                     />
                 `;
             case 'email':
@@ -384,6 +467,8 @@ class DataTable extends HTMLElement {
         this.querySelectorAll('.form-input').forEach(input => {
             if (input.type === 'date') {
                 newData[input.dataset.column] = new Date(input.value).toISOString();
+            } else if (input.type === 'file') {
+                newData[input.dataset.column] = input.files[0];
             } else {
                 newData[input.dataset.column] = input.value;
             }
