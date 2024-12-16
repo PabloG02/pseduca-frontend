@@ -1,0 +1,169 @@
+.course{
+    grid-column-end: span 4;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease 0s;
+
+}
+.course-grid{
+    grid-column: 2 / span 12;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(auto, 60px));
+    grid-gap: 40px;
+    margin-bottom: 50px;
+}
+.course-img-container {
+  position: relative; /* Necesario para posicionar elementos dentro */
+}
+
+.course-img {
+  display: block;
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
+
+.course-name {
+  position: absolute; /* Para superponerlo sobre la imagen */
+  bottom: 0; /* Colocar el texto en la parte inferior de la imagen */
+  left: 0;
+  width: 100%; /* Asegura que ocupe todo el ancho de la imagen */
+  color: white; /* Texto blanco para resaltar sobre el degradado */
+  font-size: 1.2em; /* Tamaño de fuente adecuado */
+  font-weight: bold; /* Resaltar el texto */
+  text-align: left; /* Justifica el texto a la izquierda */
+  padding: 10px 15px; /* Espaciado interno ajustado (15px en los lados para mejor visualización) */
+  z-index: 2; /* Asegura que el texto esté por encima del degradado */
+}
+
+.course-img-container::after {
+  content: ""; /* Pseudo-elemento vacío para el degradado */
+  position: absolute; /* Superposición */
+  bottom: 0; /* Inicia en la parte inferior */
+  left: 0;
+  width: 100%; /* Ocupa todo el ancho de la imagen */
+  height: 50%; /* El degradado cubre el 50% inferior de la imagen */
+  background: linear-gradient(to top, black, transparent); /* Degradado negro hacia transparente */
+  z-index: 1; /* Debajo del texto pero encima de la imagen */
+  pointer-events: none; /* Asegura que el degradado no interfiera con la interacción */
+}
+
+.course-content{
+    padding: 20px;
+    width: 50%;
+}
+.course-description{
+    display: -webkit-box; 
+    -webkit-box-orient: vertical;
+    overflow: hidden; 
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    color:#939393 
+}
+/*Lista de caracteristicas*/
+.course h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color:  var(--bg-blue-uvigo-500); /* Azul UVigo */
+  margin-bottom: 10px;
+  border-bottom: 2px solid  var(--bg-blue-uvigo-500); /* Línea decorativa */
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.course-char-container {
+  list-style: none; /* Quitar los puntos de la lista */
+  padding: 0;
+  margin: 0;
+}
+
+.course-char {
+  display: flex; /* Alineación horizontal */
+  justify-content: space-between; /* Distribución entre el título y el valor */
+  align-items: center;
+  padding: 10px 0; /* Espaciado interno */
+  border-bottom: 1px solid #e0e0e0; /* Línea divisoria entre elementos */
+  font-size: 14px;
+  color: #333333; /* Gris oscuro para texto */
+  position: relative; /* Para posicionar el símbolo ">" */
+}
+
+.course-char::before {
+  content: ">"; /* Contenido con el símbolo */
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--bg-blue-uvigo-500); /* Azul UVigo */
+  margin-right: 10px; /* Separación con el texto */
+  position: absolute;
+  left: 0; /* Alinear a la izquierda */
+  top: 50%; /* Centrar verticalmente */
+  transform: translateY(-50%); /* Ajuste para centrar */
+}
+
+.car-title {
+  font-weight: bold;
+  color:  var(--bg-blue-uvigo-500); /* Azul UVigo */
+  margin-left: 20px; /* Ajustar para que no se solape con ">" */
+  flex-shrink: 0; /* Evitar que el título se reduzca */
+}
+
+.car-element {
+  font-weight: normal;
+  color: #666666; /* Gris medio */
+  text-align: right;
+  flex-grow: 1; /* Ajustar el ancho para alineación */
+  overflow: hidden; /* Evita desbordamientos */
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Evita salto de línea */
+}
+.course-button{
+  margin-top: 5px;
+  width: 100%;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  color: #fff; 
+  background-color: #003366; 
+  border-color: #003366; 
+  border-radius: 5px; 
+  text-align: center;
+  text-decoration: none; 
+  transition: all 0.3s ease; 
+  cursor: pointer;
+}
+.course-button:hover {
+  text-decoration: none; 
+  background-color: #4c5f85;
+  border-color: #4c5f85; 
+}
+
+.course-button:active {
+  background-color: #004C97; 
+  border: 2px solid #004C97; 
+
+}
+@media only screen and (max-width: 1000px) {
+    .course {
+      grid-column-end: span 6;
+    }
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .course {
+      grid-column-end: span 12;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .course-grid {
+      grid-column: 2 / span 6;
+      grid-template-columns: repeat(6, 1fr);
+      grid-gap: 20px;
+    }
+    .course {
+      grid-column-end: span 6;
+    }
+}
