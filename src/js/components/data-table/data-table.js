@@ -157,6 +157,26 @@ class DataTable extends HTMLElement {
                     div.style.display = 'grid';
                     div.append(inputFrom, inputTo);
                     thFilter.appendChild(div);
+                } else if (col.type === 'select') {
+                    // Create a select filter
+                    const select = document.createElement('select');
+                    select.className = 'filter-input';
+                    select.dataset.column = col.name;
+
+                    // Add "No filter" option
+                    const noFilterOption = document.createElement('option');
+                    noFilterOption.value = '';
+                    noFilterOption.textContent = `No filter`;
+                    select.appendChild(noFilterOption);
+
+                    col.options.forEach(option => {
+                        const opt = document.createElement('option');
+                        opt.value = option;
+                        opt.textContent = option;
+                        select.appendChild(opt);
+                    });
+
+                    thFilter.appendChild(select);
                 } else if (col.type === 'multiselect') {
                     // Create a multiselect filter
                     const select = document.createElement('select');
@@ -248,6 +268,7 @@ class DataTable extends HTMLElement {
             number: (v) => document.createTextNode(v.toLocaleString()),
             date: (v) => document.createTextNode(new Date(v).toLocaleDateString()),
             boolean: (v) => document.createTextNode(v ? 'Yes' : 'No'),
+            select: (v) => document.createTextNode(v),
             multiselect: (v) => {
                 const fragment = document.createDocumentFragment();
                 v.forEach(item => {
@@ -383,6 +404,20 @@ class DataTable extends HTMLElement {
                         rows="${column.rows || 4}"
                         cols="${column.cols || 50}"
                     >${this.#escapeHtml(value)}</textarea>
+                `;
+            case 'select':
+                return `
+                    <select
+                        ${baseAttrs}
+                    >
+                        <option value="">Select...</option>
+                        ${column.options.map(option => `
+                            <option
+                                value="${option}"
+                                ${value === option ? 'selected' : ''}
+                            >${option}</option>
+                        `).join('')}
+                    </select>
                 `;
             case 'multiselect':
                 const options = this.#multiselectOptions[column.name];
