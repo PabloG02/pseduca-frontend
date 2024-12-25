@@ -64,14 +64,15 @@
 
 <main>
   <data-table
-          data-controller="team-member"
+          data-controller="course"
           columns='[
             {"name": "id", "id": true, "type": "number", "label": "ID", "filterable": true, "showIn": ["table", "view", "edit"]},
-            {"name": "name", "type": "text", "label": "Name", "filterable": true},
-            {"name": "email", "type": "email", "label": "Email", "filterable": true},
-            {"name": "image_uri", "type": "image", "label": "Image URI", "filterable": false},
-            {"name": "biography", "type": "textarea", "label": "Biography", "filterable": false},
-            {"name": "researcher_id", "type": "number", "label": "Researcher ID", "filterable": true}
+            {"name": "name", "type": "text", "label": "Course Name", "filterable": true},
+            {"name": "description", "type": "textarea", "label": "Description", "filterable": false},
+            {"name": "start_date", "type": "date", "label": "Start Date", "filterable": true},
+            {"name": "end_date", "type": "date", "label": "End Date", "filterable": true},
+            {"name": "image_uri", "type": "image", "label": "Course Image", "filterable": false},
+            {"name": "url", "type": "url", "label": "Course URL", "filterable": false}
           ]'>
   </data-table>
 </main>

@@ -64,14 +64,20 @@
 
 <main>
   <data-table
-          data-controller="team-member"
+          data-controller="academic-program"
           columns='[
             {"name": "id", "id": true, "type": "number", "label": "ID", "filterable": true, "showIn": ["table", "view", "edit"]},
-            {"name": "name", "type": "text", "label": "Name", "filterable": true},
-            {"name": "email", "type": "email", "label": "Email", "filterable": true},
-            {"name": "image_uri", "type": "image", "label": "Image URI", "filterable": false},
-            {"name": "biography", "type": "textarea", "label": "Biography", "filterable": false},
-            {"name": "researcher_id", "type": "number", "label": "Researcher ID", "filterable": true}
+            {"name": "name", "type": "text", "label": "Program Name", "filterable": true},
+            {"name": "qualification_level", "type": "select", "label": "Qualification Level", "filterable": true, "options": ["Master", "Doctorate"]},
+            {"name": "description", "type": "textarea", "label": "Description", "filterable": false},
+            {"name": "image_uri", "type": "image", "label": "Program Image", "filterable": false},
+            {"name": "image_alt", "type": "text", "label": "Image Alt Text", "filterable": false},
+            {"name": "available_slots", "type": "number", "label": "Available Slots", "filterable": true},
+            {"name": "teaching_type", "type": "select", "label": "Teaching Type", "filterable": true, "options": ["Online", "Onsite"]},
+            {"name": "offering_frequency", "type": "select", "label": "Offering Frequency", "filterable": true, "options": ["Annual", "Biannual", "Quarterly"]},
+            {"name": "duration_ects", "type": "number", "label": "ECTS Duration", "filterable": true},
+            {"name": "location", "type": "text", "label": "Location", "filterable": true},
+            {"name": "url", "type": "url", "label": "Program URL", "filterable": false}
           ]'>
   </data-table>
 </main>

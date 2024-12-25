@@ -1,10 +1,30 @@
 export default class I18nManager {
+    /** Singleton instance */
+    static instance = null;
+
     /**
-     * Create a new I18nManager instance
+     * Get the singleton instance of I18nManager
+     * @param {string} translationPath - Base path to translation JSON files
+     * @param {string} [defaultLanguage='en'] - The default language code
+     * @returns {I18nManager} The singleton instance
+     */
+    static getInstance(translationPath = '/assets/translations', defaultLanguage = 'en') {
+        if (!I18nManager.instance) {
+            I18nManager.instance = new I18nManager(translationPath, defaultLanguage);
+        }
+        return I18nManager.instance;
+    }
+
+    /**
+     * Private constructor to prevent direct instantiation
      * @param {string} translationPath - Base path to translation JSON files
      * @param {string} [defaultLanguage='en'] - The default language code
      */
     constructor(translationPath, defaultLanguage = 'en') {
+        if (I18nManager.instance) {
+            throw new Error("Use I18nManager.getInstance() to get the singleton instance.");
+        }
+
         this.translationPath = translationPath;
         this.currentLanguage = defaultLanguage;
         this.translations = {};
@@ -101,7 +121,7 @@ export default class I18nManager {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const i18nManager = new I18nManager('/assets/translations');
+    const i18nManager = I18nManager.getInstance('/assets/translations');
     const browserLanguage = window.navigator.language.split('-')[0];
     switch (browserLanguage) {
         case 'es':

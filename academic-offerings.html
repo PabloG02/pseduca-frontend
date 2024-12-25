@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="page.title">PsEduca | Universidad de Vigo</title>
     <link href="style.css" rel="stylesheet"/>
-    <link href="landing.css" rel="stylesheet"/>
+    <link href="src/css/academic-offerings.css" rel="stylesheet"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,14 @@
 
     <script src="src/js/common/i18n-manager.js" type="module" defer></script>
     <script src="src/js/common/db-text-provider.js" type="module" defer></script>
+    <script src="src/js/pages/academic-offerings.js" type="module" defer></script>
+
+    <link rel="stylesheet" href="src/js/components/academic-program-card/academic-program-card.css">
+    <link rel="stylesheet" href="src/js/components/course-card/course-card.css">
 
     <script src="src/js/components/svg-icon.js" defer></script>
+    <script src="src/js/components/academic-program-card/academic-program-card.js" type="module" defer></script>
+    <script src="src/js/components/course-card/course-card.js" defer></script>
 </head>
 <body>
 <header class="uvigo-bg">
@@ -59,77 +65,22 @@
 
 <!-- Specific page content -->
 
-<section class="hero" aria-label="Hero section"></section>
-
-<main>
-    <section class="uvigo-bg">
-        <div class="container about">
-            <h2>PsEduca</h2>
-            <p data-db-text="landing.project.description">PsEduca is a project of the University of Vigo that aims to disseminate educational psychology. On this website, you will find resources, tests and programs, training, dissemination, and research in the field of educational psychology.</p>
-        </div>
-    </section>
-
-    <section class="container feature-grid">
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/library-28-filled.svg" class="resources-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.resources.title">Resources</h5>
-                <p data-i18n="features.resources.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-
-        <!--    <section class="container">-->
-        <!--        <range-slider min="0" max="100"></range-slider>-->
-        <!--    </section>-->
-
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/news-28-filled.svg" class="articles-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.articles.title">Articles</h5>
-                <p data-i18n="features.articles.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/hat-graduation-28-filled.svg" class="academic-offerings-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.academic-offerings.title">Academic offerings</h5>
-                <p data-i18n="features.academic-offerings.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-
-        <div class="feature-card">
-            <svg-icon src="assets/fluent-ui-icons/book-28-filled.svg" class="research-icon"></svg-icon>
-            <div>
-                <h5 data-i18n="features.research.title">Research</h5>
-                <p data-i18n="features.research.description">Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.</p>
-            </div>
-            <a href="#" class="read-more">
-                <span data-i18n="common.read-more">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="read-more-icon">
-                    <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-    </section>
+<nav aria-label="Breadcrumb" class="container breadcrumb-nav">
+    <ul>
+        <li><a href="index.html" data-i18n="navigation.home">Home</a></li>
+        <li><span data-i18n="navigation.academic-offerings" aria-current="page">Academic offerings</span></li>
+    </ul>
+</nav>
+<main class="container">
+    <h1 class="main-section-title" data-i18n="navigation.academic-offerings">Academic offerings</h1>
+    <h2 class="subsection-title" data-i18n="academic-offerings.academic-programs">Academic programs</h2>
+    <div class="academic-programs-grid">
+        <!--Academic programs-->
+    </div>
+    <h2 class="subsection-title" data-i18n="academic-offerings.courses">Courses</h2>
+    <div class="courses-grid">
+        <!--Courses-->
+    </div>
 </main>
 
 <!-- End of specific page content -->
