@@ -58,5 +58,17 @@
   "academic-program.offering-frequency.quarterly": "Trimestral",
   "academic-program.duration-ects": "Duración",
   "academic-program.location": "Ubicación",
-  "academic-program.degree-webpage": "Páxina web do título"
+  "academic-program.degree-webpage": "Páxina web do título",
+
+  "contact.write-us": "Escríbenos",
+  "contact.form.name-surname": "Nome e apelidos",
+  "contact.form.email": "Correo electrónico",
+  "contact.form.subject": "Asunto",
+  "contact.form.message": "Mensaxe",
+  "contact.form.send": "Enviar",
+  "contact.contact-us": "Contacta con nós",
+  "contact.address": "Enderezo",
+  "contact.email": "Correo electrónico",
+  "contact.phone": "Teléfono",
+  "contact.map": "Mapa"
 }
