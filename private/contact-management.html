@@ -64,20 +64,13 @@
 
 <main>
   <data-table
-          data-controller="academic-program"
+          data-controller="contact"
           columns='[
             {"name": "id", "id": true, "type": "number", "label": "ID", "filterable": true, "showIn": ["table", "view", "edit"]},
-            {"name": "name", "type": "text", "label": "Program Name", "filterable": true},
-            {"name": "qualification_level", "type": "select", "label": "Qualification Level", "filterable": true, "options": ["Master", "Doctorate"]},
-            {"name": "description", "type": "textarea", "label": "Description", "filterable": false},
-            {"name": "image_uri", "type": "image", "label": "Program Image", "filterable": false},
-            {"name": "image_alt", "type": "text", "label": "Image Alt Text", "filterable": false},
-            {"name": "available_slots", "type": "number", "label": "Available Slots", "filterable": true},
-            {"name": "teaching_type", "type": "select", "label": "Teaching Type", "filterable": true, "options": ["Online", "Onsite"]},
-            {"name": "offering_frequency", "type": "select", "label": "Offering Frequency", "filterable": true, "options": ["Annual", "Biannual", "Quarterly"]},
-            {"name": "duration_ects", "type": "number", "label": "ECTS Duration", "filterable": true},
-            {"name": "location", "type": "text", "label": "Location", "filterable": true},
-            {"name": "url", "type": "url", "label": "Program URL", "filterable": false}
+            {"name": "address", "type": "string", "label": "Address", "filterable": true},
+            {"name": "email", "type": "email", "label": "Email", "filterable": true},
+            {"name": "phone", "type": "string", "label": "Phone", "filterable": true},
+            {"name": "google_maps_embed_url", "type": "string", "label": "Google Maps Embed URL", "filterable": false, "showIn": ["view", "create", "edit"]}
           ]'>
   </data-table>
 </main>
