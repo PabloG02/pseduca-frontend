@@ -14,7 +14,7 @@ export default class InputValidator {
             integer: (value) => /^-?\d+$/.test(value),
             alphanumeric: (value) => /^[a-zA-Z0-9]+$/.test(value),
             url: (value) => /^https?:\/\/[\w\-]+(\.[\w\-]+)+[#?/\w\-=&]+$/.test(value),
-            phone: (value) => /^(\+\d{1,3}[- ]?)?\d{10}$/.test(value),
+            phone: (value) => /^\d{9}$/.test(value),
             custom: (value, regex) => regex.test(value)
         };
 
