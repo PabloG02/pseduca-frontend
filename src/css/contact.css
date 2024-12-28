@@ -5,6 +5,24 @@ main {
         grid-column-gap: 100px;
     }
 
+    @media (width < 1280px) {
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            row-gap: 100px;
+            margin: 50px;
+            
+        }
+    
+        .submit-button{
+            width: 50% !important; 
+        }
+    }
+
+
+
+    
+
     h2 {
         font-size: var(--text-xl-font-size);
         line-height: var(--text-xl-line-height);

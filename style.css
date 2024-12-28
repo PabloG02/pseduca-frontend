@@ -66,7 +66,7 @@
 /* Font imports */
 @font-face {
     font-family: "Campus Simple";
-    src: url("/assets/fonts/CAMPUS_SIMPLE.ttf") format("truetype");
+    src: url("/pseduca-frontend/assets/fonts/CAMPUS_SIMPLE.ttf") format("truetype");
 }
 
 /* Enable cross-document view transitions */
@@ -592,13 +592,13 @@ footer section .expandable-content > *:not(:last-child) {
 
 .contact-info > *:nth-child(1)::before {
     background-color: white;
-    mask: url("/assets/fluent-ui-icons/call-20-filled.svg") no-repeat;
+    mask: url("/pseduca-frontend/assets/fluent-ui-icons/call-20-filled.svg") no-repeat;
     mask-size: cover;
 }
 
 .campus-info > *:nth-child(1)::before {
     background-color: white;
-    mask: url("/assets/fluent-ui-icons/location-20-filled.svg") no-repeat;
+    mask: url("/pseduca-frontend/assets/fluent-ui-icons/location-20-filled.svg") no-repeat;
     mask-size: cover;
 }
 
@@ -606,12 +606,12 @@ footer section .expandable-content > *:not(:last-child) {
 :is(.contact-info, .campus-info) > *:nth-child(3)::before,
 .additional-links a::before {
     background-color: white;
-    mask: url("/assets/fluent-ui-icons/chevron-right-20-filled.svg") no-repeat;
+    mask: url("/pseduca-frontend/assets/fluent-ui-icons/chevron-right-20-filled.svg") no-repeat;
     mask-size: cover;
 }
 
 #campus-do-mar::before {
-    mask: url("/assets/uvigo-icons/campus-do-mar.svg") no-repeat;
+    mask: url("/pseduca-frontend/assets/uvigo-icons/campus-do-mar.svg") no-repeat;
     mask-size: initial;
 }
 
