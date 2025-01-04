@@ -48,13 +48,28 @@ describe("CourseValidator tests", () => {
 
   test("validateField - valid end date", () => {
     const result = validator.validateField("end_date", "2023-12-31");
-    expect(result).toHaveLength(0);
+    expect(result).toEqual([]);
   });
 
   test("validateField - invalid end date", () => {
     const result = validator.validateField("end_date", "2024-04-31");
     expect(result).toHaveLength(1);
     expect(result[0].message).toBe("Invalid end date format");
+  });
+  
+  
+
+
+
+  test("validateField - start date before or equal to end date (valid)", () => {
+    const result = validator.validateField("dates", { start_date: "2024-01-01", end_date: "2024-12-31" });
+    expect(result).toEqual([]);
+  });
+  
+  test("validateField - start date after end date (invalid)", () => {
+    const result = validator.validateField("dates", { start_date: "2024-01-01", end_date: "2023-01-01" });
+    expect(result).toHaveLength(1);
+    expect(result[0].message).toBe("End date has to be after start date");
   });
 
   test("validateField - valid image URL", () => {
@@ -85,6 +100,7 @@ describe("CourseValidator tests", () => {
       description: "This is a beginner course.",
       start_date: "2023-01-01",
       end_date: "2023-12-31",
+      dates: {start_date: "2023-01-01", end_date: "2023-12-31"},
       image_uri: "https://example.com/image.jpg",
       url: "https://example.com"
     };
@@ -100,6 +116,7 @@ describe("CourseValidator tests", () => {
       description: "A".repeat(1001),
       start_date: "2024-04-31",
       end_date: "2024-02-30",
+      dates: {start_date: "2024-04-31", end_date: "2024-02-30"},
       image_uri: "https://example.com/image.txt",
       url: "invalid-url"
     };

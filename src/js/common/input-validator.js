@@ -14,7 +14,7 @@ export default class InputValidator {
             integer: (value) => /^-?\d+$/.test(value),
             alphanumeric: (value) => /^[a-zA-Z0-9]+$/.test(value),
             url: (value) => /^https?:\/\/[\w\-]+(\.[\w\-]+)+[#?/\w\-=&]+$/.test(value),
-            phone: (value) => /^(\+\d{1,3}[- ]?)?\d{10}$/.test(value),
+            phone: (value) => /^\d{9}$/.test(value),
             date: (value) => {
                 if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
                     return false; // Formato incorrecto
@@ -27,8 +27,19 @@ export default class InputValidator {
                     date.getDate() === day
                 );
             },
+            compareDates: ({ start_date, end_date }) => {
+                if (!start_date || !end_date) {
+                    return false; // Devuelve false si falta alguna fecha
+                }
+                const [start_year, start_month, start_day] = start_date.split('-').map(Number);
+                const start = new Date(start_year, start_month - 1, start_day);
+                const [end_year, end_month, end_day] = end_date.split('-').map(Number);
+                const end = new Date(end_year, end_month - 1, end_day);
+                return start <= end;
+            },            
             custom: (value, regex) => regex.test(value)
         };
+        
 
         // Merge provided rules with default rules
         this.rules = { ...this.defaultRules, ...rules };
@@ -44,7 +55,8 @@ export default class InputValidator {
             alphanumeric: 'Must contain only letters and numbers',
             url: 'Invalid URL format',
             phone: 'Invalid phone number format',
-            date: 'Must be a valid date'
+            date: 'Must be a valid date',
+            compareDates: 'End date has to be after start date'
         };
     }
 
@@ -56,7 +68,6 @@ export default class InputValidator {
      */
     validate(value, validationRules = []) {
         const errors = [];
-
         for (const rule of validationRules) {
             let isValid = true;
             let ruleName = rule;

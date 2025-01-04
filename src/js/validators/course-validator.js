@@ -21,9 +21,9 @@ export default class CourseValidator {
             ],
             end_date: [
                 { name: 'required' },
-                { name: 'date' },
+                { name: 'date' }
             ],
-            dates: [ // Nuevo campo para validación cruzada
+            dates: [
                 { name: 'compareDates' }
             ],
             image_uri: [
@@ -50,7 +50,11 @@ export default class CourseValidator {
             },
             end_date: {
                 required: 'End date is required',
-                date: 'Invalid end date format',
+                date: 'Invalid end date format'
+                //compareDates: 'End date has to be after start date'
+            },
+            dates: {
+                compareDates: 'End date has to be after start date'
             },
             image_uri: {
                 urlPattern: 'Image URL must be a valid JPG, JPEG, PNG, or GIF file'
@@ -111,21 +115,17 @@ export default class CourseValidator {
     }
 
     /**
- * Validate a course object
- * @param {Object} course - Course object to validate
- * @returns {Object} Comprehensive validation result
- */
-validateAll(course) {
-    const results = {};
-
-    // Validación individual de cada campo
-    for (const [field, value] of Object.entries(course)) {
-        if (this.config[field]) {
-            results[field] = this.validateField(field, value);
+     * Validate a course object
+     * @param {Object} course - Course object to validate
+     * @returns {Object} Comprehensive validation result
+     */
+    validateAll(course) {
+        const results = {};
+        for (const [field, value] of Object.entries(course)) {
+            if (this.config[field]) {
+                results[field] = this.validateField(field, value);
+            }
         }
+        return results;
     }
-
-    return results;
-}
-
 }
