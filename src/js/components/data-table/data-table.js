@@ -474,6 +474,9 @@ class DataTable extends HTMLElement {
                         value="${this.#escapeHtml(value)}"
                     />
                 `;
+            case 'html':
+                // TODO: Find a better way to put common attributes between inputs
+                return `<div class="form-input editor" data-column="${column.name}">${value}</div>`;
             case 'text':
             default:
                 return `
@@ -504,6 +507,8 @@ class DataTable extends HTMLElement {
                 newData[input.dataset.column] = new Date(input.value).toISOString();
             } else if (input.type === 'file') {
                 newData[input.dataset.column] = input.files[0];
+            } else if (input.classList.contains('editor')) {
+                newData[input.dataset.column] = input.querySelector('.ProseMirror').innerHTML;
             } else {
                 newData[input.dataset.column] = input.value;
             }
