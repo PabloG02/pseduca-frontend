@@ -1,5 +1,8 @@
+import { TiptapEditor } from '../tiptap-editor/tiptap-editor.js';
+
 export default class CustomDialog extends HTMLElement {
     #validator;
+    #htmlEditor;
 
     static get observedAttributes() {
         return ['data-controller'];
@@ -31,6 +34,7 @@ export default class CustomDialog extends HTMLElement {
     open(title, content, onConfirm, options = {}) {
         this.querySelector('#dialog-title').textContent = title;
         this.querySelector('#dialog-description').innerHTML = content;
+        // Validate the form inputs when the confirm button is clicked
         this.querySelector('.confirm-button').onclick = () => {
             const inputs = this.querySelectorAll('.form-input');
             let allValid = true;
@@ -46,17 +50,32 @@ export default class CustomDialog extends HTMLElement {
                 }
             });
 
+            const editor = this.querySelector('.editor');
+            if (editor) {
+                try {
+                    const editorContent = this.#htmlEditor.getHTML();
+                    const errors = this.#validator.validateField(editor.dataset.column, editorContent);
+                    if (errors.length > 0) {
+                        allValid = false;
+                    }
+                } catch (error) {
+                    console.warn(error);
+                }
+            }
+
             if (allValid) {
                 onConfirm();
             }
         };
 
+        // Hide the footer if the showFooter option is set to false (VIEW)
         if (options.showFooter === false) {
             this.querySelector('.dialog-footer').style.display = 'none';
         } else {
             this.querySelector('.dialog-footer').style.display = 'flex';
         }
 
+        // Validate the form inputs when the input value changes
         this.querySelectorAll('.form-input').forEach(input => {
             input.oninput = (event) => {
                 const parentElement = input.parentElement;
@@ -92,6 +111,14 @@ export default class CustomDialog extends HTMLElement {
                 }
             }
         });
+
+        const editor = this.querySelector('.editor');
+        if (editor) {
+            this.#htmlEditor = new TiptapEditor({
+                element: '.editor',
+                content: editor.innerHTML,
+            });
+        }
 
         this.dialog.showModal();
     }
