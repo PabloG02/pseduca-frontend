@@ -1,0 +1,147 @@
+/* Contenedor principal */
+.resource-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+}
+
+/* Título del recurso */
+.resource-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color); /* Color principal */
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.resource-title::after {
+    content: "";
+    display: block;
+    width: 50%;
+    height: 2px;
+    background-color: var(--primary-color);
+    margin: 10px auto 0;
+}
+
+/* Contenedor general: imagen + detalles */
+.resource-content {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    width: 100%;
+    flex-wrap: wrap; /* Adaptación para pantallas pequeñas */
+    justify-content: center; /* Centra los elementos horizontalmente */
+}
+
+/* Imagen del recurso */
+.resource-image {
+    flex: 0 0 240px; /* Tamaño fijo inicial */
+    width: 240px; /* Ancho fijo */
+    height: 320px; /* Altura proporcional para formato 3:4 */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f0f0f0; /* Fondo gris claro por defecto */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacarla */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra la imagen si es más pequeña */
+}
+
+.resource-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Muestra la imagen completa respetando el formato */
+    object-position: center; /* Centra la imagen si hay espacio extra */
+}
+
+/* Detalles del recurso */
+.resource-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Secciones dentro de los detalles */
+.resource-detail-section {
+    background-color: #f8f8f8;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.resource-detail-section h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.resource-detail-section p {
+    font-size: 1rem;
+    color: var(--text-color-secondary);
+    line-height: 1.6;
+}
+
+/* Tabla de detalles específicos */
+.resource-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95rem;
+}
+
+.resource-detail-table th,
+.resource-detail-table td {
+    text-align: left;
+    padding: 8px 12px;
+}
+
+.resource-detail-table th {
+    background-color: var(--primary-color);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.resource-detail-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alterna colores */
+}
+
+/* Botón de acción */
+.action-button {
+    margin-top: 30px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .resource-content {
+        flex-direction: column; /* Elementos apilados */
+        align-items: center; /* Centrado en pantalla */
+    }
+
+    .resource-image {
+        max-width: 100%;
+        height: auto; /* Ajusta la altura de la imagen */
+    }
+}
