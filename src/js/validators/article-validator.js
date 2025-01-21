@@ -25,9 +25,6 @@ export default class ArticleValidator {
                 image_uri: [
                     { name: 'urlPattern', param: /\.(jpg|jpeg|png|gif)$/, message: 'Invalid image URL format', custom: true }
                 ],
-                image_alt: [
-                    { name: 'urlPattern', param: /\.(jpg|jpeg|png|gif)$/, message: 'Invalid image URL format', custom: true }
-                ],
                 author: [
                     { name: 'required' },
                     { name: 'minLength', param: 2 },
@@ -54,9 +51,6 @@ export default class ArticleValidator {
                     maxLength: 'Body must not exceed 255 characters'
                 },
                 image_uri: {
-                    urlPattern: 'Image URL must be a valid JPG, JPEG, PNG, or GIF file'
-                },
-                image_alt: {
                     urlPattern: 'Image URL must be a valid JPG, JPEG, PNG, or GIF file'
                 },
                 author: {
