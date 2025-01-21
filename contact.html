@@ -13,7 +13,11 @@
 
     <script src="src/js/common/i18n-manager.js" type="module" defer></script>
     <script src="src/js/common/db-text-provider.js" type="module" defer></script>
+    <script src="src/js/pages/contact.js" type="module" defer></script>
 
+    <link rel="stylesheet" href="src/js/components/contact-details/contact-details.css">
+
+    <script src="src/js/components/contact-details/contact-details.js" type="module" defer></script>
     <script src="src/js/components/svg-icon.js" defer></script>
 </head>
 <body>
@@ -72,7 +76,7 @@
     <div class="contact-content">
         <section class="contact-form">
             <h2 data-i18n="contact.write-us">Write us</h2>
-            <form>
+            <form id="email-form">
                 <div class="form-group">
                     <label class="form-label" data-i18n="contact.form.name-surname">Name and surname</label>
                     <input class="form-input" type="text">
@@ -97,38 +101,8 @@
             </form>
         </section>
 
-        <section>
-            <div class="contact-details">
-                <h2 data-i18n="contact.contact-us">Contact details</h2>
-                <div class="contact-single">
-                    <svg-icon src="/assets/fluent-ui-icons/location-28-regular.svg" class="contact-icon"></svg-icon>
-                    <div>
-                        <h3 data-i18n="contact.address">Address</h3>
-                        <p>As Lagoas, 32004 Ourense</p>
-                    </div>
-                </div>
-
-                <div class="contact-single">
-                    <svg-icon src="/assets/fluent-ui-icons/mail-28-regular.svg" class="contact-icon"></svg-icon>
-                    <div>
-                        <h3 data-i18n="contact.email">Email</h3>
-                        <p>depx10@uvigo.es</p>
-                    </div>
-                </div>
-
-                <div class="contact-single">
-                    <svg-icon src="/assets/fluent-ui-icons/call-28-regular.svg" class="contact-icon"></svg-icon>
-                    <div>
-                        <h3 data-i18n="contact.phone">Phone</h3>
-                        <p>+34 988 387 102</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="map">
-                <h2 data-i18n="contact.map">Map</h2>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5897.779581683332!2d-7.855456000000001!3d42.344873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2ffebeb1855a8f%3A0xbb2380c0a6827554!2sEscola%20Superior%20de%20Enxe%C3%B1er%C3%ADa%20Inform%C3%A1tica%20(ESEI)!5e0!3m2!1ses!2ses!4v1735149880196!5m2!1ses!2ses" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+        <section class="contact-details-section">
+            <!-- Contact information -->
         </section>
     </div>
 </main>
