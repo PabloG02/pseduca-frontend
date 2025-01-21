@@ -1,10 +1,18 @@
 import DataService from "../common/data-service.js";
+import EnvironmentConfig from "../common/environment-config.js";
 
 class ContactPage {
     #dataService;
+    urlEmailPOST;
 
     constructor() {
         this.#dataService = new DataService("contact");
+
+        // TODO: Improve
+        const url = new URL(EnvironmentConfig.backendUrl);
+        url.searchParams.set('controller', "contact");
+        url.searchParams.set('action', "sendEmail");
+        this.urlEmailPOST = url;
     }
 
     async #fetchContactInfo() {
@@ -30,4 +38,9 @@ class ContactPage {
 document.addEventListener('DOMContentLoaded', () => {
     const contactPage = new ContactPage();
     contactPage.renderContactInfo();
+
+    // TODO: Improve
+    const contactForm = document.getElementById('email-form');
+    contactForm.method = 'POST';
+    contactForm.action = contactPage.urlEmailPOST;
 });
