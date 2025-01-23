@@ -1,0 +1,116 @@
+.divulgation-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto;
+    gap: 24px;
+}
+
+.divulgation-item {
+    position: relative;
+}
+
+.divulgation-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Main */
+.divulgation-item.main {
+    grid-column: span 6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+
+    > * {
+        flex: 1;
+    }
+}
+
+.divulgation-item.main img {
+    height: 300px;
+}
+
+.divulgation-item.main .content p {
+    margin-top: 24px;
+}
+
+/* Secondary */
+.divulgation-item.secondary {
+    grid-column: span 3;
+    height: 300px;
+}
+
+.divulgation-item.secondary a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.divulgation-item.secondary .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7) 100%);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.divulgation-item.secondary h2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    padding: 16px;
+    margin: 0;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.divulgation-item.secondary:hover h2 {
+    transform: translateY(-6px);
+}
+
+/* Tertiary */
+.divulgation-item.tertiary {
+    grid-column: span 2;
+}
+
+.divulgation-item.tertiary img {
+    height: 225px;
+    margin-bottom: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .divulgation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .divulgation-item.main,
+    .divulgation-item.secondary,
+    .divulgation-item.tertiary {
+        grid-column: span 1;
+    }
+
+    .divulgation-item.main {
+        flex-direction: column;
+    }
+
+    .divulgation-item.main img {
+        width: 100%;
+        height: 250px;
+    }
+}
+
+@media (max-width: 640px) {
+    .divulgation-grid {
+        padding: 1rem;
+        gap: 1rem;
+    }
+}
