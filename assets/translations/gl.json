@@ -107,6 +107,7 @@
   "user.roles": "Roles",
   "user.created-at": "Fecha de creación",
   "user.last-login": "Último acceso",
+
   "team-member.id": "ID",
   "team-member.name": "Nome",
   "team-member.email": "Correo electrónico",
@@ -120,6 +121,7 @@
   "academic-program.description": "Descripción",
   "academic-program.image-uri": "Imaxe",
   "academic-program.image-alt": "Texto alternativo da imaxe",
+  
   "course.id": "ID",
   "course.name": "Nome",
   "course.description": "Descripción",
@@ -135,6 +137,4 @@
   "article.image-alt": "Texto alternativo da imaxe",
   "article.created-at": "Fecha de creación",
   "article.author": "Autor"
-
-
 }
