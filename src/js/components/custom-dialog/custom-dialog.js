@@ -1,4 +1,5 @@
 import { TiptapEditor } from '../tiptap-editor/tiptap-editor.js';
+import I18nManager from "../../common/i18n-manager.js";
 
 export default class CustomDialog extends HTMLElement {
     #validator;
@@ -119,6 +120,9 @@ export default class CustomDialog extends HTMLElement {
                 content: editor.innerHTML,
             });
         }
+
+        // TODO: Find a better way to do it
+        I18nManager.getInstance().translateDocument();
 
         this.dialog.showModal();
     }

@@ -73,6 +73,9 @@
   "contact.phone": "Teléfono",
   "contact.map": "Mapa",
 
+
+  "data-table.add-row": "Añadir fila",
+
   "editor.command.bold": "Negrita",
   "editor.command.italic": "Cursiva",
   "editor.command.underline": "Subrayado",
@@ -92,5 +95,48 @@
   "editor.command.blockquote": "Cita",
   "editor.command.horizontalRule": "Línea horizontal",
   "editor.command.undo": "Deshacer",
-  "editor.command.redo": "Rehacer"
+  "editor.command.redo": "Rehacer",
+
+
+  "webpage-text.text-key": "ID del texto",
+  "webpage-text.text": "Texto",
+
+  "user.username": "Nombre de usuario",
+  "user.email": "Correo electrónico",
+  "user.name": "Nombre",
+  "user.password": "Contraseña",
+  "user.activated": "Activado",
+  "user.roles": "Roles",
+  "user.created-at": "Fecha de creación",
+  "user.last-login": "Último acceso",
+
+  "team-member.id": "ID",
+  "team-member.name": "Nombre",
+  "team-member.email": "Correo electrónico",
+  "team-member.image-uri": "Imagen",
+  "team-member.biography": "Biografía",
+  "team-member.researcher-id": "ID de investigador",
+
+  "academic-program.id": "ID",
+  "academic-program.name": "Nombre",
+  "academic-program.qualification-level": "Nivel de cualificación",
+  "academic-program.description": "Descripción",
+  "academic-program.image-uri": "Imagen",
+  "academic-program.image-alt": "Texto alternativo de la imagen",
+
+  "course.id": "ID",
+  "course.name": "Nombre",
+  "course.description": "Descripción",
+  "course.start-date": "Fecha de inicio",
+  "course.end-date": "Fecha de fin",
+  "course.image-uri": "Imagen",
+  "course.url": "URL",
+
+  "article.id": "ID",
+  "article.title": "Título",
+  "article.subtitle": "Subtítulo",
+  "article.image-uri": "Imagen",
+  "article.image-alt": "Texto alternativo de la imagen",
+  "article.created-at": "Fecha de creación",
+  "article.author": "Autor"
 }

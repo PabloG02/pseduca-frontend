@@ -1,6 +1,7 @@
 import DataService from "../../common/data-service.js";
 import EnvironmentConfig from "../../common/environment-config.js";
 import CustomDialog from "../custom-dialog/custom-dialog.js";
+import I18nManager from "../../common/i18n-manager.js";
 
 class DataTable extends HTMLElement {
     // Private fields
@@ -115,6 +116,7 @@ class DataTable extends HTMLElement {
 
             // Add the column label
             thLabel.textContent = label;
+            thLabel.dataset.i18n = this.getAttribute('data-controller') + '.' + col.name.replace(/_/g, '-');
 
             // Add a filter input if the column is filterable
             if (col.filterable) {
@@ -297,7 +299,7 @@ class DataTable extends HTMLElement {
         // HTML structure
         const header = `
           <div class="crud-header">
-            ${this.#getAllowedActions().includes('create') ? '<button class="primary-button add">+ Add Row</button>' : ''}
+            ${this.#getAllowedActions().includes('create') ? '<button class="primary-button add" data-i18n="data-table.add-row">+ Add Row</button>' : ''}
             <button class="secondary-button">Actions ▾</button>
           </div>
         `;
@@ -326,6 +328,8 @@ class DataTable extends HTMLElement {
         `;
 
         this.addEventListeners();
+        // TODO: Find a better way to do it
+        I18nManager.getInstance().translateDocument();
     }
 
     /** Render the table body and footer */
@@ -346,6 +350,8 @@ class DataTable extends HTMLElement {
         this.querySelector('.pagination').outerHTML = pagination;
 
         this.addEventListeners();
+        // TODO: Find a better way to do it
+        I18nManager.getInstance().translateDocument();
     }
 
     /** Open the dialog and populate it dynamically */
@@ -379,7 +385,7 @@ class DataTable extends HTMLElement {
 
             content += `
                 <div>
-                    <label class="form-label">${col.label}</label>
+                    <label class="form-label" data-i18n="${this.getAttribute('data-controller')}.${col.name.replace(/_/g, '-')}">${col.label}</label>
                     ${this.#renderInputElement(col, value, isReadOnly)}
                 </div>
             `;
