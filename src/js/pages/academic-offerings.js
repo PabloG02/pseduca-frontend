@@ -43,10 +43,15 @@ class AcademicOfferings {
 
     async renderCourses() {
         const courses = await this.#fetchCourses();
-        const coursesContainer = document.getElementsByClassName('courses')[0];
+        const coursesContainer = document.getElementsByClassName('courses-grid')[0];
+        console.log(courses);
 
         courses.forEach(course => {
             const courseElement = document.createElement('course-card');
+            courseElement.setAttribute('title', course.title);
+            courseElement.setAttribute('imageUrl', course.imageUrl);
+            courseElement.setAttribute('description', course.description);
+            courseElement.setAttribute('link', course.link);
             coursesContainer.appendChild(courseElement);
         });
     }

@@ -73,7 +73,7 @@
             height: 20px;
             margin-inline-end: 12px;
             background-color: var(--bg-blue-uvigo-700);
-            mask: url("/assets/fluent-ui-icons/chevron-right-20-filled.svg") no-repeat;
+            mask: url("/pseduca-frontend/assets/fluent-ui-icons/chevron-right-20-filled.svg") no-repeat;
             mask-size: cover;
         }
     }

@@ -1,0 +1,91 @@
+.course-card {
+    .img-container {
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h4 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 18px 36px;
+            color: white;
+            font-size: var(--text-xl-font-size);
+            line-height: var(--text-xl-line-height);
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 2; /* Ensures the text is above the overlay */
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, black, transparent);
+            pointer-events: none;
+            z-index: 1; /* Places the overlay above the image */
+        }
+    }
+
+    .description {
+        font-size: var(--text-base-font-size);
+        line-height: var(--text-base-line-height);
+        margin-top: 24px;
+        margin-bottom: 28px;
+    }
+
+    h5 {
+        font-size: var(--text-xl-font-size);
+        line-height: var(--text-xl-line-height);
+        font-weight: 400;
+        margin-bottom: 18px;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 24px;
+
+        list-style-type: none;
+
+        li {
+            display: flex;
+            align-items: center;
+            font-weight: 300;
+
+            span:first-child {
+                font-weight: 400;
+            }
+        }
+
+        li::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-inline-end: 12px;
+            background-color: var(--bg-blue-uvigo-700);
+            mask: url("/assets/fluent-ui-icons/chevron-right-20-filled.svg") no-repeat;
+            mask-size: cover;
+        }
+    }
+
+    a {
+        font-size: var(--text-base-font-size);
+        line-height: var(--text-base-line-height);
+        border-radius: 0;
+
+        &:hover {
+            background-color: var(--bg-blue-uvigo-700);
+            color: white;
+        }
+    }
+}
