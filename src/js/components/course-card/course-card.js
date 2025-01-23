@@ -1,15 +1,20 @@
 class CourseCard extends HTMLElement {
     connectedCallback() {
-        // const title = this.getAttribute('title');
-        // const imageUrl = this.getAttribute('image-url');
-        // const description = this.getAttribute('description');
-        // const link = this.getAttribute('link');
+        const name = this.getAttribute('name');
+        const description = this.getAttribute('description');
+        const imageUrl = this.getAttribute('image-uri');
+        const url = this.getAttribute('url');
 
         this.innerHTML = `
-          <div class="course-card">
-            
-          </div>
-        `;
+        <div class="card">
+            <img src="${imageUrl}" class="card-image">
+            <div class="card-content">
+                <div class="card-name">${name}</div>
+                <div id="description" class="card-description">${description}</div>
+                <a href="${url}" target="_blank" class="card-button">Website</a>
+            </div>
+        </div>
+      `;
     }
 }
 
