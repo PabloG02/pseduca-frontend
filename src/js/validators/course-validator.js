@@ -13,6 +13,7 @@ export default class CourseValidator {
                 { name: 'maxLength', param: 255 }
             ],
             description: [
+                { name: 'required' },
                 { name: 'maxLength', param: 1000 }
             ],
             start_date: [
@@ -23,13 +24,16 @@ export default class CourseValidator {
                 { name: 'required' },
                 { name: 'date' },
             ],
-            dates: [ // Nuevo campo para validación cruzada
-                { name: 'compareDates' }
-            ],
             image_uri: [
+                { name: 'required' },
                 { name: 'urlPattern', param: /\.(jpg|jpeg|png|gif)$/, message: 'Invalid image URL format', custom: true }
             ],
+            image_alt: [
+                { name: 'required' },
+                { name: 'maxLength', param: 100 }
+            ],
             url: [
+                { name: 'required' },
                 { name: 'url', message: 'Invalid URL format' }
             ]
         };
@@ -42,6 +46,7 @@ export default class CourseValidator {
                 maxLength: 'Course name must not exceed 255 characters'
             },
             description: {
+                required: 'Description is required',
                 maxLength: 'Description must not exceed 1000 characters'
             },
             start_date: {
@@ -53,9 +58,15 @@ export default class CourseValidator {
                 date: 'Invalid end date format',
             },
             image_uri: {
+                required: 'Image URL is required',
                 urlPattern: 'Image URL must be a valid JPG, JPEG, PNG, or GIF file'
             },
+            image_alt: { 
+                required: 'Aternative text is required',
+                maxLength: 'Alternative text must not exceed 100 characters'
+            },
             url: {
+                required: 'URL is required',
                 url: 'Invalid course URL format'
             }
         };
