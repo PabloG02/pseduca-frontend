@@ -8,7 +8,7 @@ export default class I18nManager {
      * @param {string} [defaultLanguage='en'] - The default language code
      * @returns {I18nManager} The singleton instance
      */
-    static getInstance(translationPath = '/assets/translations', defaultLanguage = 'en') {
+    static getInstance(translationPath = '/pseduca-frontend/assets/translations', defaultLanguage = 'en') {
         if (!I18nManager.instance) {
             I18nManager.instance = new I18nManager(translationPath, defaultLanguage);
         }
@@ -121,7 +121,7 @@ export default class I18nManager {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const i18nManager = I18nManager.getInstance('/assets/translations');
+    const i18nManager = I18nManager.getInstance('/pseduca-frontend/assets/translations');
     const browserLanguage = window.navigator.language.split('-')[0];
     switch (browserLanguage) {
         case 'es':

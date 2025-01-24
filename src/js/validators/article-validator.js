@@ -7,6 +7,9 @@ export default class ArticleValidator {
     constructor() {
             // Validation configurations for article fields
             this.config = {
+                id: [
+                    { name: 'required' },
+                ],
                 title: [
                     { name: 'required' },
                     { name: 'minLength', param: 2 },
@@ -23,7 +26,12 @@ export default class ArticleValidator {
                     { name: 'maxLength', param: 255 }
                 ],
                 image_uri: [
+                    { name: 'required' },
                     { name: 'urlPattern', param: /\.(jpg|jpeg|png|gif)$/, message: 'Invalid image URL format', custom: true }
+                ],
+                image_alt: [
+                    { name: 'required' },
+                    { name: 'maxLength', param: 100 }
                 ],
                 author: [
                     { name: 'required' },
@@ -35,6 +43,9 @@ export default class ArticleValidator {
     
             // Custom error messages for validation rules
             this.customErrorMessages = {
+                id: {
+                    required: 'ID is required'
+                },
                 title: {
                     required: 'Title is required',
                     minLength: 'Title must be at least 2 characters long',
@@ -51,7 +62,12 @@ export default class ArticleValidator {
                     maxLength: 'Body must not exceed 255 characters'
                 },
                 image_uri: {
+                    required: 'Image URL is required',
                     urlPattern: 'Image URL must be a valid JPG, JPEG, PNG, or GIF file'
+                },
+                image_alt: { 
+                    required: 'Alternative text is required',
+                    maxLength: 'Alternative text must not exceed 100 characters'
                 },
                 author: {
                     required: 'Author is required',

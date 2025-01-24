@@ -51,17 +51,6 @@ describe("AcademicProgramValidator tests", () => {
         expect(result[0].message).toBe("Image URL must be a valid JPG, JPEG, PNG, or GIF file");
     });
 
-    test("validateField - valid image URL", () => {
-        const result = validator.validateField("image_alt", "https://example.com/image.jpg");
-        expect(result).toEqual([]);
-    });
-    
-    test("validateField - invalid image URL", () => {
-        const result = validator.validateField("image_alt", "https://example.com/image.txt");
-        expect(result).toHaveLength(1);
-        expect(result[0].message).toBe("Image URL must be a valid JPG, JPEG, PNG, or GIF file");
-    });
-
     test("validateField - valid available_slots", () => {
         const result = validator.validateField("available_slots", "123");
         expect(result).toEqual([]); 
@@ -169,9 +158,6 @@ describe("AcademicProgramValidator tests", () => {
 
       expect(result.available_slots).toHaveLength(1);
       expect(result.available_slots[0].message).toBe("Available slots must be an integer");
-
-      expect(result.image_alt).toHaveLength(1);
-      expect(result.image_alt[0].message).toBe("Image URL must be a valid JPG, JPEG, PNG, or GIF file");
 
       expect(result.duration_ects).toHaveLength(1);
       expect(result.duration_ects[0].message).toBe("Duration must be an integer");

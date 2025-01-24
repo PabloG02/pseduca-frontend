@@ -244,7 +244,7 @@ class DataTable extends HTMLElement {
 
                 const button = document.createElement('button');
                 const icon = document.createElement('svg-icon');
-                icon.setAttribute('src', `/assets/fluent-ui-icons/${action}-16-filled.svg`);
+                icon.setAttribute('src', `/pseduca-frontend/assets/fluent-ui-icons/${action}-16-filled.svg`);
                 button.appendChild(icon);
                 const textNode = document.createTextNode(action.replace(/^\w/, c => c.toUpperCase()));
                 button.appendChild(textNode);

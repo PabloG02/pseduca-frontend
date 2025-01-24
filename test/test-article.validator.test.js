@@ -69,17 +69,6 @@ describe("ArticleValidator tests", () => {
         expect(result[0].message).toBe("Image URL must be a valid JPG, JPEG, PNG, or GIF file");
     });
 
-    test("validateField - valid image URL", () => {
-        const result = validator.validateField("image_alt", "https://example.com/image.jpg");
-        expect(result).toEqual([]);
-    });
-    
-    test("validateField - invalid image URL", () => {
-        const result = validator.validateField("image_alt", "https://example.com/image.txt");
-        expect(result).toHaveLength(1);
-        expect(result[0].message).toBe("Image URL must be a valid JPG, JPEG, PNG, or GIF file");
-    });
-
     test("validateField - valid article author", () => {
         const result = validator.validateField("author", "Intro to Programming");
         expect(result).toEqual([]);
@@ -134,9 +123,6 @@ describe("ArticleValidator tests", () => {
     
         expect(result.image_uri).toHaveLength(1);
         expect(result.image_uri[0].message).toBe("Image URL must be a valid JPG, JPEG, PNG, or GIF file");
-    
-        expect(result.image_alt).toHaveLength(1);
-        expect(result.image_alt[0].message).toBe("Image URL must be a valid JPG, JPEG, PNG, or GIF file");
     
         expect(result.author).toHaveLength(1);
         expect(result.author[0].message).toBe("Author must be at least 2 characters long");

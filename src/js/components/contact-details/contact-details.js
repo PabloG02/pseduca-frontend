@@ -13,7 +13,7 @@ class ContactDetails extends HTMLElement {
                 <h2 data-i18n="contact.contact-us">Contact details</h2>
 
                 <div class="contact-single">
-                    <svg-icon src="/assets/fluent-ui-icons/location-28-regular.svg" class="contact-icon"></svg-icon>
+                    <svg-icon src="/pseduca-frontend/assets/fluent-ui-icons/location-28-regular.svg" class="contact-icon"></svg-icon>
                     <div>
                         <h3 data-i18n="contact.address">Address</h3>
                         <p>${address}</p>
@@ -21,7 +21,7 @@ class ContactDetails extends HTMLElement {
                 </div>
 
                 <div class="contact-single">
-                    <svg-icon src="/assets/fluent-ui-icons/mail-28-regular.svg" class="contact-icon"></svg-icon>
+                    <svg-icon src="/pseduca-frontend/assets/fluent-ui-icons/mail-28-regular.svg" class="contact-icon"></svg-icon>
                     <div>
                         <h3 data-i18n="contact.email">Email</h3>
                         <p>${email}</p>
@@ -29,7 +29,7 @@ class ContactDetails extends HTMLElement {
                 </div>
 
                 <div class="contact-single">
-                    <svg-icon src="/assets/fluent-ui-icons/call-28-regular.svg" class="contact-icon"></svg-icon>
+                    <svg-icon src="/pseduca-frontend/assets/fluent-ui-icons/call-28-regular.svg" class="contact-icon"></svg-icon>
                     <div>
                         <h3 data-i18n="contact.phone">Phone</h3>
                         <p>${phone}</p>

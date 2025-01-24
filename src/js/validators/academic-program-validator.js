@@ -16,10 +16,16 @@ export default class AcademicProgramValidator {
                 { name: 'required' }
             ],
             description: [
+                { name: 'required' },
                 { name: 'maxLength', param: 1000 }
             ],
             image_uri: [
+                { name: 'required' },
                 { name: 'urlPattern', param: /\.(jpg|jpeg|png|gif)$/, message: 'Invalid image URL format', custom: true }
+            ],
+            image_alt: [
+                { name: 'required' },
+                { name: 'maxLength', param: 100 }
             ],
             available_slots: [
                 { name: 'required' },
@@ -41,6 +47,7 @@ export default class AcademicProgramValidator {
                 { name: 'maxLength', param: 50 },
             ],
             url: [
+                { name: 'required' },
                 { name: 'url', message: 'Invalid URL format' }
             ]
         };
@@ -56,10 +63,16 @@ export default class AcademicProgramValidator {
                 required: 'Qualification level is required',
             },
             description: {
+                required: 'Description is required',
                 maxLength: 'Description must not exceed 1000 characters'
             },
             image_uri: {
+                required: 'Image URL is required',
                 urlPattern: 'Image URL must be a valid JPG, JPEG, PNG, or GIF file'
+            },
+            image_alt: { 
+                required: 'Alternative text is required',
+                maxLength: 'Alternative text must not exceed 100 characters'
             },
             available_slots: {
                 required: 'Available slots is required',
@@ -81,6 +94,7 @@ export default class AcademicProgramValidator {
                 maxLength: `Location must not exceed 50 characters`,
             },
             url: {
+                required: 'URL is required',
                 url: 'Invalid academic program URL format'
             }
         };
