@@ -1,4 +1,4 @@
-import TestingProgramsValidator from "../src/js/validators/tests-and-programs-validator.js";
+import TestingProgramsValidator from "../src/js/validators/program-validator.js";
 
 describe("TestingProgramsValidator tests", () => {
   let validator;

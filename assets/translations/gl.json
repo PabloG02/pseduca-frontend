@@ -137,5 +137,12 @@
   "article.image-uri": "Imaxe",
   "article.image-alt": "Texto alternativo da imaxe",
   "article.created-at": "Fecha de creación",
-  "article.author": "Autor"
+  "article.author": "Autor",
+
+  "program.id": "ID",
+  "program.name": "Nome",
+  "program.description": "Descripción",
+  "program.image-uri": "Imaxe",
+  "program.image-alt": "Texto alternativo da imaxe",
+  "program.url": "URL"
 }
